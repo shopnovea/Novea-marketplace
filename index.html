@@ -104,6 +104,15 @@ nav{gap:13px}
 <input id="password" type="password" placeholder="Password">
 <button class="btn" onclick="login()">LOG IN</button>
 <button class="btn" onclick="signup()">CREATE ACCOUNT</button>
+
+<p>
+  <a href="#" onclick="resetPassword(); return false;"
+     style="color:#493e34;font-size:13px;">
+    Forgot your password?
+  </a>
+</p>
+
+<p class="status" id="resetStatus"></p>
 <p class="status" id="authStatus"></p>
 </div>
 </div>
