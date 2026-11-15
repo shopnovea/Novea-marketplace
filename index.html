@@ -1,1 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOVÉA | Pre-loved. Reimagined.</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f1eb;color:#493e34;font-family:Arial,sans-serif}
+header{text-align:center;padding:30px;border-bottom:1px solid #ddd4c8}
+.logo{font:42px Georgia;letter-spacing:8px;margin:0}
+.tagline{font-size:10px;letter-spacing:4px;margin-top:10px}
+nav{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;padding:20px}
+nav a{color:#493e34;text-decoration:none;font-size:12px}
+.hero{background:#eae3d8;text-align:center;padding:75px 20px}
+.hero h2{font:normal 52px Georgia;margin:20px 0}
+.hero p{line-height:1.8;max-width:480px;margin:20px auto}
+.btn{display:inline-block;background:#493e34;color:white;padding:15px 25px;text-decoration:none;font-size:12px;letter-spacing:2px}
+section{padding:45px 6%}
+h2.title{text-align:center;font:normal 32px Georgia;margin-bottom:30px}
+.categories,.products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.category{background:#e6ddd1;text-align:center;padding:35px 5px;font:22px Georgia;cursor:pointer}
+.product{background:#fffefa;padding-bottom:12px}
+.product img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.product h3,.product p{padding:0 12px}
+.product h3{font:18px Georgia}
+.product p{font-size:13px}
+.search{display:block;width:100%;max-width:450px;margin:0 auto 25px;padding:14px;border:1px solid #cfc4b7}
+.sell{text-align:center;background:#eae3d8;padding:60px 20px}
+.sell h2{font:38px Georgia}
+footer{background:#493e34;color:white;text-align:center;padding:35px}
+@media(max-width:650px){.categories,.products{grid-template-columns:repeat(2,1fr)}.hero h2{font-size:38px}}
+</style>
+</head>
+<body>
+<header>
+<h1 class="logo">NOVÉA</h1>
+<div class="tagline">PRE-LOVED. REIMAGINED.</div>
+</header>
+<nav>
+<a href="#home">HOME</a>
+<a href="#shop">SHOP</a>
+<a href="#categories">CATEGORIES</a>
+<a href="#sell">SELL WITH US</a>
+</nav>
+<div class="hero" id="home">
+<p> A MORE CONSIDERED WARDROBE </p>
+<h2>Fashion deserves<br>a second life.</h2>
+<p>Discover beautiful pre-loved fashion. Find your next favorite piece and give exceptional clothing a new home.</p>
+<a class="btn" href="#shop">DISCOVER THE COLLECTION</a>
+</div>
+<section id="categories">
+<h2 class="title">Shop by category</h2>
+<div class="categories">
+<div class="category" onclick="filter('Women')">Women</div>
+<div class="category" onclick="filter('Men')">Men</div>
+<div class="category" onclick="filter('Bags')">Handbags</div>
+<div class="category" onclick="filter('Shoes')">Shoes</div>
+</div>
+</section>
+<section id="shop">
+<h2 class="title">The Collection</h2>
+<input class="search" id="search" placeholder="Search the collection..." oninput="searchItems()">
+<div class="products" id="products">
+<div class="product" data-cat="Women">
+<img src="https://images.unsplash.com/photo-1548126032-079a0fb0099d?w=600" alt="Fashion coat">
+<h3>Classic Tailored Coat</h3><p>$85 · Size M</p>
+</div>
+<div class="product" data-cat="Bags">
+<img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600" alt="Handbag">
+<h3>Vintage Leather Bag</h3><p>$68 · One size</p>
+</div>
+<div class="product" data-cat="Shoes">
+<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600" alt="Sneakers">
+<h3>Classic Sneakers</h3><p>$55 · Size 8</p>
+</div>
+<div class="product" data-cat="Men">
+<img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600" alt="Jacket">
+<h3>Timeless Jacket</h3><p>$72 · Size L</p>
+</div>
+</div>
+<p style="text-align:center;font-size:11px;color:#897d70">DEMONSTRATION PRODUCTS — NOT FOR SALE</p>
+</section>
+<div class="sell" id="sell">
+<p>JOIN OUR COMMUNITY</p>
+<h2>Your closet has potential.</h2>
+<p>Give your pre-loved pieces a new home.</p>
+<a class="btn" href="mailto:hello@novea.example">BECOME A SELLER</a>
+</div>
+<footer>
+<h2 style="font-family:Georgia;letter-spacing:6px">NOVÉA</h2>
+PRE-LOVED. REIMAGINED.
+<p>Discover. Rewear. Repeat.</p>
+<p>© 2026 NOVÉA</p>
+</footer>
+<script>
+function filter(category){
+document.querySelectorAll('.product').forEach(p=>{
+p.style.display=p.dataset.cat===category?'block':'none';
+});
+document.getElementById('search').value='';
+document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+}
+function searchItems(){
+let q=document.getElementById('search').value.toLowerCase();
+document.querySelectorAll('.product').forEach(p=>{
+p.style.display=p.innerText.toLowerCase().includes(q)?'block':'none';
+});
+}
+</script>
+</body>
+</html>
 
