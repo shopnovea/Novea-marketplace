@@ -348,17 +348,25 @@ async function login() {
 
   message("authStatus", "Logging in...");
 
-  const {data, error} = await db.auth.signInWithPassword({
-    email,
-    password
-  });
+  try {
+    const { data, error } = await db.auth.signInWithPassword({
+      email,
+      password
+    });
 
-  if (error) {
-    message("authStatus", error.message);
-    return;
+    if (error) {
+      message("authStatus", error.message);
+      return;
+    }
+
+    message("authStatus", "Login successful. Loading your account...");
+
+    await loadAccount(data.user);
+
+  } catch (err) {
+    console.error("Login error:", err);
+    message("authStatus", "Login failed: " + err.message);
   }
-
-  await loadAccount(data.user);
 }
 
 async function loadAccount(user) {
