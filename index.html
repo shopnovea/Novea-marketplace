@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NOVÉA | Pre-loved. Reimagined.</title>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
@@ -17,7 +16,7 @@ header{text-align:center;padding:25px;border-bottom:1px solid #ddd4c8}
 nav{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;padding:18px}
 nav a,nav button{color:#493e34;text-decoration:none;font-size:12px;background:none;border:0;cursor:pointer}
 button,.btn{cursor:pointer}
-.btn{display:inline-block;background:#493e34;color:white;padding:13px 22px;border:0;text-decoration:none;font-size:12px;letter-spacing:1px}
+.btn{display:inline-block;background:#493e34;color:white;padding:13px 22px;border:0;text-decoration:none;font-size:12px;letter-spacing:1px;margin:5px}
 .hero{background:#eae3d8;text-align:center;padding:65px 20px}
 .hero h2{font:normal 48px Georgia;margin:20px 0}
 .hero p{line-height:1.8;max-width:480px;margin:20px auto}
@@ -25,20 +24,22 @@ section{padding:40px 6%}
 .title{text-align:center;font:normal 32px Georgia;margin-bottom:28px}
 .categories,.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .category{background:#e6ddd1;text-align:center;padding:30px 5px;font:22px Georgia;cursor:pointer}
+.category:hover{background:#d8cabb}
 .product{background:#fffefa;padding-bottom:15px;overflow:hidden}
 .product img{width:100%;aspect-ratio:3/4;object-fit:cover;background:#eae3d8}
 .product h3,.product p{padding:0 12px}
 .product h3{font:19px Georgia}
 .product p{font-size:13px}
-.product button{margin:0 12px}
 .search{display:block;width:100%;max-width:450px;margin:0 auto 25px;padding:14px;border:1px solid #cfc4b7}
-.panel{max-width:520px;margin:25px auto;background:#fffefa;padding:25px}
-.panel input,.panel textarea,.panel select{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #cfc4b7;font:14px Arial}
+.panel{max-width:520px;margin:25px auto;background:#fffefa;padding:25px;text-align:left}
+.panel input,.panel textarea,.panel select{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #cfc4b7;font:14px Arial;background:white}
 .panel label{font-size:12px}
 .panel h2{font:26px Georgia}
 .hidden{display:none!important}
 .status{text-align:center;font-size:13px;min-height:20px;margin:12px}
 .account{background:#eae3d8;text-align:center;padding:35px 15px}
+#imagePreview{display:none;width:100%;max-width:300px;max-height:350px;margin:15px auto;object-fit:contain}
+.photo-help{font-size:12px;color:#897d70;line-height:1.6}
 footer{background:#493e34;color:white;text-align:center;padding:35px}
 footer h2{font-family:Georgia;letter-spacing:6px}
 @media(max-width:650px){
@@ -130,6 +131,7 @@ nav{gap:13px}
 
 <div class="panel hidden" id="listingForm">
 <h2>List an item</h2>
+
 <label>Product title</label>
 <input id="productTitle" placeholder="Product name">
 
@@ -164,72 +166,96 @@ nav{gap:13px}
 <option>Other</option>
 </select>
 
-
 <label>Size</label>
 <select id="productSize">
-  <option value="">Select size</option>
-
-  <optgroup label="Letter Sizes">
-    <option>XXS</option>
-    <option>XS</option>
-    <option>S</option>
-    <option>M</option>
-    <option>L</option>
-    <option>XL</option>
-    <option>XXL</option>
-    <option>XXXL</option>
-  </optgroup>
-
-  <optgroup label="Women's Numeric Sizes (US)">
-    <option>00</option>
-    <option>0</option>
-    <option>2</option>
-    <option>4</option>
-    <option>6</option>
-    <option>8</option>
-    <option>10</option>
-    <option>12</option>
-    <option>14</option>
-    <option>16</option>
-    <option>18</option>
-    <option>20</option>
-    <option>22</option>
-    <option>24</option>
-  </optgroup>
-
-  <optgroup label="Men's Numeric Sizes">
-    <option>28</option>
-    <option>29</option>
-    <option>30</option>
-    <option>31</option>
-    <option>32</option>
-    <option>33</option>
-    <option>34</option>
-    <option>36</option>
-    <option>38</option>
-    <option>40</option>
-    <option>42</option>
-    <option>44</option>
-    <option>46</option>
-  </optgroup>
+<option value="">Select size</option>
+<optgroup label="Letter sizes">
+<option>XXS</option>
+<option>XS</option>
+<option>S</option>
+<option>M</option>
+<option>L</option>
+<option>XL</option>
+<option>XXL</option>
+<option>XXXL</option>
+</optgroup>
+<optgroup label="Women's US sizes">
+<option>00</option>
+<option>0</option>
+<option>2</option>
+<option>4</option>
+<option>6</option>
+<option>8</option>
+<option>10</option>
+<option>12</option>
+<option>14</option>
+<option>16</option>
+<option>18</option>
+<option>20</option>
+<option>22</option>
+<option>24</option>
+</optgroup>
+<optgroup label="Men's waist sizes">
+<option>28</option>
+<option>29</option>
+<option>30</option>
+<option>31</option>
+<option>32</option>
+<option>33</option>
+<option>34</option>
+<option>36</option>
+<option>38</option>
+<option>40</option>
+<option>42</option>
+<option>44</option>
+<option>46</option>
+</optgroup>
+<optgroup label="US shoe sizes">
+<option>US Shoe 5</option>
+<option>US Shoe 6</option>
+<option>US Shoe 7</option>
+<option>US Shoe 8</option>
+<option>US Shoe 9</option>
+<option>US Shoe 10</option>
+<option>US Shoe 11</option>
+<option>US Shoe 12</option>
+<option>US Shoe 13</option>
+<option>US Shoe 14</option>
+</optgroup>
+<option>One Size</option>
 </select>
 
+<label>Condition</label>
+<select id="productCondition">
+<option>New with tags</option>
+<option>New without tags</option>
+<option>Very good</option>
+<option>Good</option>
+<option>Fair</option>
+</select>
 
-<label>Take a photo or choose an existing photo</label>
+<label>Price (USD)</label>
+<input id="productPrice" type="number" min="0.01" step="0.01" placeholder="85.00">
 
+<label>Take a photo or upload an existing photo</label>
 <input
-  id="productImage"
-  type="file"
-  accept="image/*"
-  capture="environment"
+id="productImage"
+type="file"
+accept="image/*"
+capture="environment"
+onchange="previewProductImage(event)"
 >
 
-<label>Product photo</label>
-<input id="productImage" type="file" accept="image/*">
+<p class="photo-help">
+On a phone, choose Camera to take a new picture or Photo Library to select one. On a laptop, you can upload an existing picture or use a connected camera if your browser supports it.
+</p>
+
+<img id="imagePreview" alt="Product photo preview">
 
 <button class="btn" onclick="addProduct()">PUBLISH PRODUCT</button>
 <p class="status" id="listingStatus"></p>
 </div>
+
 </section>
 
 <footer>
@@ -256,6 +282,35 @@ let selectedCategory = "All";
 
 function message(id, text) {
   document.getElementById(id).textContent = text;
+}
+
+function previewProductImage(event) {
+  const file = event.target.files[0];
+  const preview = document.getElementById("imagePreview");
+
+  if (!file) {
+    preview.style.display = "none";
+    preview.removeAttribute("src");
+    return;
+  }
+
+  if (!file.type.startsWith("image/")) {
+    message("listingStatus", "Please select an image.");
+    event.target.value = "";
+    preview.style.display = "none";
+    return;
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    message("listingStatus", "Please choose an image smaller than 5 MB.");
+    event.target.value = "";
+    preview.style.display = "none";
+    return;
+  }
+
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = "block";
+  message("listingStatus", "Photo ready to publish.");
 }
 
 async function signup() {
@@ -305,6 +360,7 @@ async function login() {
 
   await loadAccount(data.user);
 }
+</script>
 
 async function loadAccount(user) {
   currentUser = user;
@@ -345,6 +401,7 @@ async function loadAccount(user) {
   document.getElementById("loggedOut").classList.add("hidden");
   document.getElementById("loggedIn").classList.remove("hidden");
   document.getElementById("logoutBtn").classList.remove("hidden");
+
   document.getElementById("welcome").textContent =
     "Welcome, " + (currentProfile.full_name || currentProfile.username || "NOVÉA member");
 
@@ -401,7 +458,7 @@ async function createShop() {
   const {error} = await db.from("shops").insert({
     seller_id: currentUser.id,
     shop_name: shopName,
-    description: description
+    description
   });
 
   if (error) {
@@ -409,12 +466,17 @@ async function createShop() {
     return;
   }
 
-  // The account role is updated only through an authorized profile policy.
-  await db.from("profiles")
+  const {error: roleError} = await db.from("profiles")
     .update({role: "seller"})
     .eq("id", currentUser.id);
 
   await loadAccount(currentUser);
+
+  if (roleError) {
+    message("shopCreateStatus", "Shop created, but seller role update failed: " + roleError.message);
+    return;
+  }
+
   message("shopCreateStatus", "Your shop is ready!");
 }
 
@@ -427,8 +489,8 @@ async function addProduct() {
   const title = document.getElementById("productTitle").value.trim();
   const description = document.getElementById("productDescription").value.trim();
   const category = document.getElementById("productCategory").value;
-  const brand = document.getElementById("productBrand").value.trim();
-  const size = document.getElementById("productSize").value.trim();
+  const brand = document.getElementById("productBrand").value;
+  const size = document.getElementById("productSize").value;
   const condition = document.getElementById("productCondition").value;
   const price = Number(document.getElementById("productPrice").value);
   const file = document.getElementById("productImage").files[0];
@@ -483,8 +545,7 @@ async function addProduct() {
   });
 
   if (error) {
-    message("listingStatus", "Listing failed: " + error.message +
-      ". If the photo uploaded, it may remain in storage.");
+    message("listingStatus", "Listing failed: " + error.message);
     return;
   }
 
@@ -497,6 +558,8 @@ async function addProduct() {
   document.getElementById("productPrice").value = "";
   document.getElementById("productImage").value = "";
 
+  document.getElementById("imagePreview").style.display = "none";
+
   await loadProducts();
 }
 
@@ -507,6 +570,7 @@ async function loadProducts() {
   const {data, error} = await db
     .from("products")
     .select("*")
+    .eq("status", "active")
     .order("created_at", {ascending: false});
 
   if (error) {
@@ -605,6 +669,7 @@ async function logout() {
   document.getElementById("loggedOut").classList.remove("hidden");
   document.getElementById("logoutBtn").classList.add("hidden");
   document.getElementById("sell").classList.add("hidden");
+
   message("authStatus", "You have logged out.");
 }
 
@@ -627,6 +692,7 @@ async function initialize() {
 }
 
 initialize();
+
 </script>
 
 </body>
