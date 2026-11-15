@@ -160,8 +160,14 @@ nav{gap:13px}
 <option>Fair</option>
 </select>
 
-<label>Price (USD)</label>
-<input id="productPrice" type="number" min="0.01" step="0.01" placeholder="85.00">
+<label>Take a photo or choose an existing photo</label>
+
+<input
+  id="productImage"
+  type="file"
+  accept="image/*"
+  capture="environment"
+>
 
 <label>Product photo</label>
 <input id="productImage" type="file" accept="image/*">
