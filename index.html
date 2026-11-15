@@ -16,6 +16,7 @@ header{text-align:center;padding:25px;border-bottom:1px solid #ddd4c8}
 nav{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;padding:18px}
 nav a,nav button{color:#493e34;text-decoration:none;font-size:12px;background:none;border:0;cursor:pointer}
 button,.btn{cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
 .btn{display:inline-block;background:#493e34;color:white;padding:13px 22px;border:0;text-decoration:none;font-size:12px;letter-spacing:1px;margin:5px}
 .hero{background:#eae3d8;text-align:center;padding:65px 20px}
 .hero h2{font:normal 48px Georgia;margin:20px 0}
@@ -42,6 +43,7 @@ section{padding:40px 6%}
 .photo-help{font-size:12px;color:#897d70;line-height:1.6}
 footer{background:#493e34;color:white;text-align:center;padding:35px}
 footer h2{font-family:Georgia;letter-spacing:6px}
+#loginCountdown{color:#9a4438;font-weight:bold}
 @media(max-width:650px){
 .categories,.products{grid-template-columns:repeat(2,1fr)}
 .hero h2{font-size:36px}
@@ -94,22 +96,29 @@ nav{gap:13px}
 
 <section id="account" class="account">
 <h2 class="title">Your NOVÉA account</h2>
+
 <div id="loggedOut">
 <div class="panel">
 <h2>Welcome back</h2>
 <p>Log in or create your account.</p>
+
 <label>Email</label>
 <input id="email" type="email" placeholder="Your email">
+
 <label>Password</label>
 <input id="password" type="password" placeholder="Password">
-<button class="btn" onclick="login()">LOG IN</button>
+
+<button class="btn" id="loginBtn" onclick="login()">LOG IN</button>
+
+<p class="status" id="loginCountdown"></p>
+
 <button class="btn" onclick="signup()">CREATE ACCOUNT</button>
 
 <p>
-  <a href="#" onclick="resetPassword(); return false;"
-     style="color:#493e34;font-size:13px;">
-    Forgot your password?
-  </a>
+<a href="#" onclick="resetPassword(); return false;"
+style="color:#493e34;font-size:13px;">
+Forgot your password?
+</a>
 </p>
 
 <p class="status" id="resetStatus"></p>
@@ -132,8 +141,10 @@ nav{gap:13px}
 <h2>Create your shop</h2>
 <label>Shop name</label>
 <input id="shopName" placeholder="Your shop name">
+
 <label>Shop description</label>
 <textarea id="shopDescription" placeholder="Tell buyers about your shop"></textarea>
+
 <button class="btn" onclick="createShop()">CREATE SHOP</button>
 <p class="status" id="shopCreateStatus"></p>
 </div>
@@ -188,6 +199,7 @@ nav{gap:13px}
 <option>XXL</option>
 <option>XXXL</option>
 </optgroup>
+
 <optgroup label="Women's US sizes">
 <option>00</option>
 <option>0</option>
@@ -204,6 +216,7 @@ nav{gap:13px}
 <option>22</option>
 <option>24</option>
 </optgroup>
+
 <optgroup label="Men's waist sizes">
 <option>28</option>
 <option>29</option>
@@ -219,6 +232,7 @@ nav{gap:13px}
 <option>44</option>
 <option>46</option>
 </optgroup>
+
 <optgroup label="US shoe sizes">
 <option>US Shoe 5</option>
 <option>US Shoe 6</option>
@@ -231,6 +245,7 @@ nav{gap:13px}
 <option>US Shoe 13</option>
 <option>US Shoe 14</option>
 </optgroup>
+
 <option>One Size</option>
 </select>
 
@@ -247,13 +262,7 @@ nav{gap:13px}
 <input id="productPrice" type="number" min="0.01" step="0.01" placeholder="85.00">
 
 <label>Take a photo or upload an existing photo</label>
-<input
-id="productImage"
-type="file"
-accept="image/*"
-capture="environment"
-onchange="previewProductImage(event)"
->
+<input id="productImage" type="file" accept="image/*" capture="environment" onchange="previewProductImage(event)">
 
 <p class="photo-help">
 On a phone, choose Camera to take a new picture or Photo Library to select one. On a laptop, you can upload an existing picture or use a connected camera if your browser supports it.
@@ -264,7 +273,6 @@ On a phone, choose Camera to take a new picture or Photo Library to select one. 
 <button class="btn" onclick="addProduct()">PUBLISH PRODUCT</button>
 <p class="status" id="listingStatus"></p>
 </div>
-
 </section>
 
 <footer>
@@ -275,6 +283,7 @@ PRE-LOVED. REIMAGINED.
 </footer>
 
 <script>
+
 const SUPABASE_URL = "https://tcodkriyrwlzdrqfzwyb.supabase.co";
 const SUPABASE_KEY = "sb_publishable_scjOBsZKxD2pfmI2fgGG9w_n8vIXU0q";
 
@@ -288,6 +297,14 @@ let currentProfile = null;
 let currentShop = null;
 let allProducts = [];
 let selectedCategory = "All";
+
+let failedLoginAttempts = 0;
+let loginLockedUntil = 0;
+let loginCountdownTimer = null;
+let loginInProgress = false;
+
+const MAX_LOGIN_ATTEMPTS = 3;
+const LOGIN_LOCK_DURATION = 30;
 
 function message(id, text) {
   document.getElementById(id).textContent = text;
@@ -322,6 +339,9 @@ function previewProductImage(event) {
   message("listingStatus", "Photo ready to publish.");
 }
 
+
+// CREATE ACCOUNT
+
 async function signup() {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
@@ -351,22 +371,108 @@ async function signup() {
   }
 }
 
+
+// LOGIN COUNTDOWN
+
+function startLoginCountdown() {
+  loginLockedUntil = Date.now() + LOGIN_LOCK_DURATION * 1000;
+
+  const loginBtn = document.getElementById("loginBtn");
+  const countdown = document.getElementById("loginCountdown");
+
+  loginBtn.disabled = true;
+
+  if (loginCountdownTimer) {
+    clearInterval(loginCountdownTimer);
+  }
+
+  function updateCountdown() {
+    const remaining = Math.ceil(
+      (loginLockedUntil - Date.now()) / 1000
+    );
+
+    if (remaining <= 0) {
+      clearInterval(loginCountdownTimer);
+      loginCountdownTimer = null;
+
+      loginLockedUntil = 0;
+      failedLoginAttempts = 0;
+
+      loginBtn.disabled = false;
+      loginBtn.textContent = "LOG IN";
+
+      countdown.textContent = "You can try logging in again.";
+
+      return;
+    }
+
+    loginBtn.textContent = "WAIT " + remaining + "s";
+
+    countdown.textContent =
+      "Too many failed attempts. Try again in " +
+      remaining + " seconds.";
+  }
+
+  updateCountdown();
+
+  loginCountdownTimer = setInterval(updateCountdown, 1000);
+}
+
+
+// LOGIN
+
 async function login() {
+  if (Date.now() < loginLockedUntil || loginInProgress) {
+    return;
+  }
+
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    message("authStatus", "Please enter your email and password.");
+    return;
+  }
+
+  loginInProgress = true;
+  document.getElementById("loginBtn").disabled = true;
 
   message("authStatus", "Logging in...");
 
   try {
-    const { data, error } = await db.auth.signInWithPassword({
+    const {data, error} = await db.auth.signInWithPassword({
       email,
       password
     });
 
     if (error) {
-      message("authStatus", error.message);
+      failedLoginAttempts++;
+
+      if (failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
+        message("authStatus", "Too many failed login attempts.");
+        startLoginCountdown();
+      } else {
+        message(
+          "authStatus",
+          "Incorrect login details. Attempt " +
+          failedLoginAttempts + " of " +
+          MAX_LOGIN_ATTEMPTS + "."
+        );
+      }
+
       return;
     }
+
+    failedLoginAttempts = 0;
+    loginLockedUntil = 0;
+
+    if (loginCountdownTimer) {
+      clearInterval(loginCountdownTimer);
+      loginCountdownTimer = null;
+    }
+
+    document.getElementById("loginBtn").textContent = "LOG IN";
+    document.getElementById("loginCountdown").textContent = "";
 
     message("authStatus", "Login successful. Loading your account...");
 
@@ -375,8 +481,44 @@ async function login() {
   } catch (err) {
     console.error("Login error:", err);
     message("authStatus", "Login failed: " + err.message);
+
+  } finally {
+    loginInProgress = false;
+
+    if (Date.now() >= loginLockedUntil) {
+      document.getElementById("loginBtn").disabled = false;
+    }
   }
 }
+
+
+// FORGOT PASSWORD
+
+async function resetPassword() {
+  const email = document.getElementById("email").value.trim();
+
+  if (!email) {
+    message("resetStatus", "Please enter your email address first.");
+    return;
+  }
+
+  message("resetStatus", "Sending password reset email...");
+
+  const {error} = await db.auth.resetPasswordForEmail(email);
+
+  if (error) {
+    message("resetStatus", error.message);
+    return;
+  }
+
+  message(
+    "resetStatus",
+    "Password reset instructions have been sent if this email is registered."
+  );
+}
+
+
+// LOAD ACCOUNT
 
 async function loadAccount(user) {
   currentUser = user;
@@ -422,11 +564,15 @@ async function loadAccount(user) {
     "Welcome, " + (currentProfile.full_name || currentProfile.username || "NOVÉA member");
 
   document.getElementById("userEmail").textContent = user.email;
+
   document.getElementById("userRole").textContent =
     "Account type: " + currentProfile.role;
 
   await loadShop();
 }
+
+
+// LOAD SELLER SHOP
 
 async function loadShop() {
   if (!currentUser) return;
@@ -447,13 +593,18 @@ async function loadShop() {
   if (currentShop) {
     document.getElementById("shopForm").classList.add("hidden");
     document.getElementById("listingForm").classList.remove("hidden");
+
     document.getElementById("shopCreateStatus").textContent =
       "Your shop: " + currentShop.shop_name;
+
   } else {
     document.getElementById("shopForm").classList.remove("hidden");
     document.getElementById("listingForm").classList.add("hidden");
   }
 }
+
+
+// CREATE SHOP
 
 async function createShop() {
   if (!currentUser) {
@@ -489,12 +640,18 @@ async function createShop() {
   await loadAccount(currentUser);
 
   if (roleError) {
-    message("shopCreateStatus", "Shop created, but seller role update failed: " + roleError.message);
+    message(
+      "shopCreateStatus",
+      "Shop created, but seller role update failed: " + roleError.message
+    );
     return;
   }
 
   message("shopCreateStatus", "Your shop is ready!");
 }
+
+
+// ADD PRODUCT
 
 async function addProduct() {
   if (!currentUser || !currentShop) {
@@ -525,7 +682,9 @@ async function addProduct() {
 
   const extension = file.name.split(".").pop().toLowerCase();
   const safeExtension = /^[a-z0-9]+$/.test(extension) ? extension : "jpg";
-  const imagePath = currentUser.id + "/" + crypto.randomUUID() + "." + safeExtension;
+
+  const imagePath =
+    currentUser.id + "/" + crypto.randomUUID() + "." + safeExtension;
 
   const {error: uploadError} = await db.storage
     .from("product-images")
@@ -579,8 +738,12 @@ async function addProduct() {
   await loadProducts();
 }
 
+
+// LOAD PRODUCTS
+
 async function loadProducts() {
   const container = document.getElementById("products");
+
   container.innerHTML = "<p>Loading products...</p>";
 
   const {data, error} = await db
@@ -596,8 +759,12 @@ async function loadProducts() {
   }
 
   allProducts = data || [];
+
   renderProducts();
 }
+
+
+// DISPLAY PRODUCTS
 
 function renderProducts() {
   const container = document.getElementById("products");
@@ -647,27 +814,48 @@ function renderProducts() {
     category.textContent = p.category || "";
 
     card.append(img, heading, price, details, category);
+
     container.appendChild(card);
   });
 }
 
+
+// FILTER CATEGORY
+
 function filterCategory(category) {
   selectedCategory = category;
+
   document.getElementById("search").value = "";
+
   renderProducts();
-  document.getElementById("shop").scrollIntoView({behavior:"smooth"});
+
+  document.getElementById("shop").scrollIntoView({
+    behavior: "smooth"
+  });
 }
+
+
+// SELLER DASHBOARD
 
 function showSeller() {
   if (!currentUser) {
-    document.getElementById("account").scrollIntoView({behavior:"smooth"});
+    document.getElementById("account").scrollIntoView({
+      behavior: "smooth"
+    });
     return;
   }
 
   document.getElementById("sell").classList.remove("hidden");
-  document.getElementById("sell").scrollIntoView({behavior:"smooth"});
+
+  document.getElementById("sell").scrollIntoView({
+    behavior: "smooth"
+  });
+
   loadShop();
 }
+
+
+// LOG OUT
 
 async function logout() {
   const {error} = await db.auth.signOut();
@@ -691,11 +879,17 @@ async function logout() {
 
 document.getElementById("logoutBtn").addEventListener("click", logout);
 
+
+// SUPABASE AUTHENTICATION LISTENER
+
 db.auth.onAuthStateChange((event, session) => {
   if (event === "SIGNED_IN" && session) {
     setTimeout(() => loadAccount(session.user), 0);
   }
 });
+
+
+// INITIALIZE WEBSITE
 
 async function initialize() {
   const {data} = await db.auth.getSession();
@@ -713,4 +907,3 @@ initialize();
 
 </body>
 </html>
-
