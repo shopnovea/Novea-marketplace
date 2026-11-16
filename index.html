@@ -5,12 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NOVÉA | Pre-loved. Reimagined.</title>
-<meta name="description" content="Discover NOVÉA, your destination for curated pre-loved fashion, designer pieces, handbags, shoes and sustainable style. Pre-loved. Reimagined.">
-<meta name="keywords" content="NOVÉA, pre-loved fashion, secondhand clothing, designer resale, sustainable fashion, vintage clothing, pre-loved handbags">
+<meta name="description" content="Discover NOVÉA, your destination for curated pre-loved fashion.">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="NOVÉA | Pre-loved. Reimagined.">
-<meta property="og:description" content="A more considered wardrobe. Discover beautiful pre-loved fashion with NOVÉA.">
-<meta property="og:type" content="website">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
@@ -24,39 +20,15 @@ nav a,nav button{color:#493e34;text-decoration:none;font-size:12px;background:no
 button,.btn{cursor:pointer}
 button:disabled{opacity:.5;cursor:not-allowed}
 .btn{display:inline-block;background:#493e34;color:white;padding:13px 22px;border:0;text-decoration:none;font-size:12px;letter-spacing:1px;margin:5px}
+.danger{background:#934b40}
 .hero{background:#eae3d8;text-align:center;padding:65px 20px}
-.coming-soon {
-  background: #f5f1eb;
-  padding: 30px 20px;
-  margin: 0 auto 35px;
-  max-width: 650px;
-  border: 1px solid #d8cabb;
-}
-
-.coming-soon .coming-label {
-  font-size: 10px;
-  letter-spacing: 4px;
-}
-
-.coming-soon h2 {
-  font: normal 32px Georgia, serif;
-  margin: 18px 0;
-}
-
-.coming-soon p {
-  font-size: 13px;
-  line-height: 1.8;
-  max-width: 420px;
-  margin: 15px auto;
-}
-
-.coming-soon span {
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-
 .hero h2{font:normal 48px Georgia;margin:20px 0}
 .hero p{line-height:1.8;max-width:480px;margin:20px auto}
+.coming-soon{background:#f5f1eb;padding:30px 20px;margin:0 auto 35px;max-width:650px;border:1px solid #d8cabb}
+.coming-soon h2{font:normal 32px Georgia;margin:18px 0}
+.coming-label{font-size:10px;letter-spacing:4px}
+.coming-soon p{font-size:13px;line-height:1.8;max-width:420px;margin:15px auto}
+.coming-soon span{font-size:10px;letter-spacing:3px}
 section{padding:40px 6%}
 .title{text-align:center;font:normal 32px Georgia;margin-bottom:28px}
 .categories,.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -68,7 +40,7 @@ section{padding:40px 6%}
 .product h3{font:19px Georgia}
 .product p{font-size:13px}
 .search{display:block;width:100%;max-width:450px;margin:0 auto 25px;padding:14px;border:1px solid #cfc4b7}
-.panel{max-width:520px;margin:25px auto;background:#fffefa;padding:25px;text-align:left}
+.panel{max-width:600px;margin:25px auto;background:#fffefa;padding:25px;text-align:left}
 .panel input,.panel textarea,.panel select{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #cfc4b7;font:14px Arial;background:white}
 .panel label{font-size:12px}
 .panel h2{font:26px Georgia}
@@ -79,11 +51,17 @@ section{padding:40px 6%}
 .photo-help{font-size:12px;color:#897d70;line-height:1.6}
 footer{background:#493e34;color:white;text-align:center;padding:35px}
 footer h2{font-family:Georgia;letter-spacing:6px}
-#loginCountdown{color:#9a4438;font-weight:bold}
+.seller-item{display:grid;grid-template-columns:100px 1fr;gap:18px;background:#fffefa;padding:15px;margin:15px 0;align-items:center}
+.seller-item img{width:100px;height:125px;object-fit:cover;background:#eae3d8}
+.seller-item h3{font:20px Georgia;margin:5px 0}
+.seller-item p{font-size:13px;line-height:1.5}
+.dashboard-title{font:26px Georgia;margin-top:35px}
 @media(max-width:650px){
 .categories,.products{grid-template-columns:repeat(2,1fr)}
 .hero h2{font-size:36px}
 nav{gap:13px}
+.seller-item{grid-template-columns:85px 1fr;gap:12px}
+.seller-item img{width:85px;height:110px}
 }
 </style>
 </head>
@@ -104,24 +82,27 @@ nav{gap:13px}
 <button id="logoutBtn" class="hidden">LOG OUT</button>
 </nav>
 
+<!-- HOME SECTION -->
+
 <div class="hero" id="home">
 <div class="coming-soon">
-  <p class="coming-label">A NEW WAY TO REWEAR</p>
-  <h2>NOVÉA IS COMING SOON.</h2>
-  <p>
-    We're putting the finishing touches on something special.
-    Discover a more considered wardrobe with NOVÉA.
-  </p>
-  <span>PRE-LOVED. REIMAGINED.</span>
+<p class="coming-label">A NEW WAY TO REWEAR</p>
+<h2>NOVÉA IS COMING SOON.</h2>
+<p>We're putting the finishing touches on something special. Discover a more considered wardrobe with NOVÉA.</p>
+<span>PRE-LOVED. REIMAGINED.</span>
 </div>
+
 <p>A MORE CONSIDERED WARDROBE</p>
 <h2>Fashion deserves<br>a second life.</h2>
-<p>Discover beautiful pre-loved fashion. Find your next favorite piece and give exceptional clothing a new home.</p>
+<p>Discover beautiful pre-loved fashion. Find your next favourite piece and give exceptional clothing a new home.</p>
 <a class="btn" href="#shop">DISCOVER THE COLLECTION</a>
 </div>
 
+<!-- CATEGORIES -->
+
 <section id="categories">
 <h2 class="title">Shop by category</h2>
+
 <div class="categories">
 <div class="category" onclick="filterCategory('Women')">Women</div>
 <div class="category" onclick="filterCategory('Men')">Men</div>
@@ -130,24 +111,36 @@ nav{gap:13px}
 </div>
 </section>
 
+<!-- SHOP -->
+
 <section id="shop">
-<h2 class="title">Our Collection Is Coming Soon</h2>
-<p style="text-align:center;line-height:1.8;">
-  We're carefully curating our first collection.
-  Beautiful pre-loved fashion is coming to NOVÉA soon.
+<h2 class="title">Our Collection</h2>
+
+<p style="text-align:center;line-height:1.8">
+Discover beautiful pre-loved fashion and give exceptional pieces a new home.
 </p>
-<input class="search" id="search" placeholder="Search products..." oninput="renderProducts()">
+
+<input class="search" id="search"
+placeholder="Search products..."
+oninput="renderProducts()">
+
 <div class="products" id="products">
 <p>Loading collection...</p>
 </div>
+
 <p class="status" id="shopStatus"></p>
 </section>
 
+<!-- CUSTOMER ACCOUNT -->
+
 <section id="account" class="account">
+
 <h2 class="title">Your NOVÉA account</h2>
 
 <div id="loggedOut">
+
 <div class="panel">
+
 <h2>Welcome back</h2>
 <p>Log in or create your account.</p>
 
@@ -159,53 +152,78 @@ nav{gap:13px}
 
 <button class="btn" id="loginBtn" onclick="login()">LOG IN</button>
 
-<p class="status" id="loginCountdown"></p>
-
 <button class="btn" onclick="signup()">CREATE ACCOUNT</button>
 
 <p>
-<a href="#" onclick="resetPassword(); return false;"
-style="color:#493e34;font-size:13px;">
+<a href="#" onclick="resetPassword();return false"
+style="color:#493e34">
 Forgot your password?
 </a>
 </p>
 
-<p class="status" id="resetStatus"></p>
 <p class="status" id="authStatus"></p>
+<p class="status" id="resetStatus"></p>
+
 </div>
 </div>
+
+<!-- LOGGED IN ACCOUNT -->
 
 <div id="loggedIn" class="hidden">
+
 <h2 id="welcome"></h2>
+
 <p id="userEmail"></p>
+
 <p id="userRole"></p>
-<button class="btn" onclick="showSeller()">SELLER DASHBOARD</button>
+
+<button class="btn" onclick="showSeller()">
+SELLER DASHBOARD
+</button>
+
 </div>
+
 </section>
 
+<!-- SELLER DASHBOARD -->
+
 <section id="sell" class="hidden">
+
 <h2 class="title">Your seller dashboard</h2>
 
+<!-- CREATE SHOP -->
+
 <div class="panel" id="shopForm">
+
 <h2>Create your shop</h2>
+
 <label>Shop name</label>
 <input id="shopName" placeholder="Your shop name">
 
 <label>Shop description</label>
-<textarea id="shopDescription" placeholder="Tell buyers about your shop"></textarea>
+<textarea id="shopDescription"
+placeholder="Tell buyers about your shop"></textarea>
 
-<button class="btn" onclick="createShop()">CREATE SHOP</button>
+<button class="btn" onclick="createShop()">
+CREATE SHOP
+</button>
+
 <p class="status" id="shopCreateStatus"></p>
+
 </div>
 
+<!-- PRODUCT LISTING FORM -->
+
 <div class="panel hidden" id="listingForm">
-<h2>List an item</h2>
+
+<h2>List a new item</h2>
 
 <label>Product title</label>
 <input id="productTitle" placeholder="Product name">
 
 <label>Description</label>
-<textarea id="productDescription" placeholder="Describe your item"></textarea>
+<textarea id="productDescription"
+placeholder="Describe your item"></textarea>
 
 <label>Category</label>
 <select id="productCategory">
@@ -237,7 +255,9 @@ Forgot your password?
 
 <label>Size</label>
 <select id="productSize">
+
 <option value="">Select size</option>
+
 <optgroup label="Letter sizes">
 <option>XXS</option>
 <option>XS</option>
@@ -296,6 +316,7 @@ Forgot your password?
 </optgroup>
 
 <option>One Size</option>
+
 </select>
 
 <label>Condition</label>
@@ -308,651 +329,676 @@ Forgot your password?
 </select>
 
 <label>Price (USD)</label>
-<input id="productPrice" type="number" min="0.01" step="0.01" placeholder="85.00">
+<input id="productPrice"
+type="number"
+min="0.01"
+step="0.01"
+placeholder="85.00">
 
 <label>Take a photo or upload an existing photo</label>
-<input id="productImage" type="file" accept="image/*" capture="environment" onchange="previewProductImage(event)">
+
+<input
+id="productImage"
+type="file"
+accept="image/*"
+capture="environment"
+onchange="previewProductImage(event)">
 
 <p class="photo-help">
-On a phone, choose Camera to take a new picture or Photo Library to select one. On a laptop, you can upload an existing picture or use a connected camera if your browser supports it.
+On a phone, choose Camera to take a new picture or Photo Library to select one.
+On a laptop, upload an existing picture.
+Maximum image size: 5 MB.
 </p>
 
 <img id="imagePreview" alt="Product photo preview">
 
-<button class="btn" onclick="addProduct()">PUBLISH PRODUCT</button>
+<button class="btn" id="publishBtn" onclick="addProduct()">
+PUBLISH PRODUCT
+</button>
+
 <p class="status" id="listingStatus"></p>
+
 </div>
+
+<!-- MY LISTINGS: NEW SELLER FEATURE -->
+
+<div class="panel" id="myListings">
+
+<h2 class="dashboard-title">My Listings</h2>
+
+<p>
+Manage the products you have listed on NOVÉA.
+</p>
+
+<div id="sellerProducts">
+<p>Your listings will appear here.</p>
+</div>
+
+<p class="status" id="deleteStatus"></p>
+
+<button class="btn" onclick="loadSellerListings()">
+REFRESH MY LISTINGS
+</button>
+
+</div>
+
 </section>
 
+<!-- FOOTER -->
+
 <footer>
+
 <h2>NOVÉA</h2>
+
 PRE-LOVED. REIMAGINED.
+
 <p>Discover. Rewear. Repeat.</p>
+
 <p>© 2026 NOVÉA</p>
+
 </footer>
 
 <script>
 
+// SUPABASE CONNECTION
+
 const SUPABASE_URL = "https://tcodkriyrwlzdrqfzwyb.supabase.co";
 const SUPABASE_KEY = "sb_publishable_scjOBsZKxD2pfmI2fgGG9w_n8vIXU0q";
 
-const db = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+const db = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
 let currentUser = null;
 let currentProfile = null;
 let currentShop = null;
 let allProducts = [];
 let selectedCategory = "All";
-
-let failedLoginAttempts = 0;
-let loginLockedUntil = 0;
-let loginCountdownTimer = null;
 let loginInProgress = false;
 
-const MAX_LOGIN_ATTEMPTS = 3;
-const LOGIN_LOCK_DURATION = 30;
-
-function message(id, text) {
-  document.getElementById(id).textContent = text;
+function message(id,text){
+document.getElementById(id).textContent=text;
 }
 
-function previewProductImage(event) {
-  const file = event.target.files[0];
-  const preview = document.getElementById("imagePreview");
+// IMAGE PREVIEW
 
-  if (!file) {
-    preview.style.display = "none";
-    preview.removeAttribute("src");
-    return;
-  }
+function previewProductImage(event){
+const file=event.target.files[0];
+const preview=document.getElementById("imagePreview");
 
-  if (!file.type.startsWith("image/")) {
-    message("listingStatus", "Please select an image.");
-    event.target.value = "";
-    preview.style.display = "none";
-    return;
-  }
-
-  if (file.size > 5 * 1024 * 1024) {
-    message("listingStatus", "Please choose an image smaller than 5 MB.");
-    event.target.value = "";
-    preview.style.display = "none";
-    return;
-  }
-
-  preview.src = URL.createObjectURL(file);
-  preview.style.display = "block";
-  message("listingStatus", "Photo ready to publish.");
+if(!file){
+preview.style.display="none";
+return;
 }
 
+if(!file.type.startsWith("image/") || file.size>5*1024*1024){
+message("listingStatus","Please select an image smaller than 5 MB.");
+event.target.value="";
+preview.style.display="none";
+return;
+}
+
+preview.src=URL.createObjectURL(file);
+preview.style.display="block";
+message("listingStatus","Photo ready to publish.");
+}
 
 // CREATE ACCOUNT
 
-async function signup() {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+async function signup(){
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
 
-  if (!email || password.length < 6) {
-    message("authStatus", "Enter an email and a password of at least 6 characters.");
-    return;
-  }
-
-  message("authStatus", "Creating your account...");
-
-  const {data, error} = await db.auth.signUp({
-    email,
-    password
-  });
-
-  if (error) {
-    message("authStatus", error.message);
-    return;
-  }
-
-  if (data.session) {
-    await loadAccount(data.session.user);
-    message("authStatus", "Account created!");
-  } else {
-    message("authStatus", "Check your email to confirm your account, then log in.");
-  }
+if(!email || password.length<6){
+message("authStatus","Enter an email and a password of at least 6 characters.");
+return;
 }
 
+message("authStatus","Creating account...");
 
-// LOGIN COUNTDOWN
+const {data,error}=await db.auth.signUp({email,password});
 
-function startLoginCountdown() {
-  loginLockedUntil = Date.now() + LOGIN_LOCK_DURATION * 1000;
-
-  const loginBtn = document.getElementById("loginBtn");
-  const countdown = document.getElementById("loginCountdown");
-
-  loginBtn.disabled = true;
-
-  if (loginCountdownTimer) {
-    clearInterval(loginCountdownTimer);
-  }
-
-  function updateCountdown() {
-    const remaining = Math.ceil(
-      (loginLockedUntil - Date.now()) / 1000
-    );
-
-    if (remaining <= 0) {
-      clearInterval(loginCountdownTimer);
-      loginCountdownTimer = null;
-
-      loginLockedUntil = 0;
-      failedLoginAttempts = 0;
-
-      loginBtn.disabled = false;
-      loginBtn.textContent = "LOG IN";
-
-      countdown.textContent = "You can try logging in again.";
-
-      return;
-    }
-
-    loginBtn.textContent = "WAIT " + remaining + "s";
-
-    countdown.textContent =
-      "Too many failed attempts. Try again in " +
-      remaining + " seconds.";
-  }
-
-  updateCountdown();
-
-  loginCountdownTimer = setInterval(updateCountdown, 1000);
+if(error){
+message("authStatus",error.message);
+return;
 }
 
+if(data.session){
+await loadAccount(data.session.user);
+message("authStatus","Account created!");
+}else{
+message("authStatus","Check your email to confirm your account.");
+}
+}
 
 // LOGIN
 
-async function login() {
-  if (Date.now() < loginLockedUntil || loginInProgress) {
-    return;
-  }
+async function login(){
+if(loginInProgress)return;
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
 
-  if (!email || !password) {
-    message("authStatus", "Please enter your email and password.");
-    return;
-  }
-
-  loginInProgress = true;
-  document.getElementById("loginBtn").disabled = true;
-
-  message("authStatus", "Logging in...");
-
-  try {
-    const {data, error} = await db.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    if (error) {
-      failedLoginAttempts++;
-
-      if (failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
-        message("authStatus", "Too many failed login attempts.");
-        startLoginCountdown();
-      } else {
-        message(
-          "authStatus",
-          "Incorrect login details. Attempt " +
-          failedLoginAttempts + " of " +
-          MAX_LOGIN_ATTEMPTS + "."
-        );
-      }
-
-      return;
-    }
-
-    failedLoginAttempts = 0;
-    loginLockedUntil = 0;
-
-    if (loginCountdownTimer) {
-      clearInterval(loginCountdownTimer);
-      loginCountdownTimer = null;
-    }
-
-    document.getElementById("loginBtn").textContent = "LOG IN";
-    document.getElementById("loginCountdown").textContent = "";
-
-    message("authStatus", "Login successful. Loading your account...");
-
-    await loadAccount(data.user);
-
-  } catch (err) {
-    console.error("Login error:", err);
-    message("authStatus", "Login failed: " + err.message);
-
-  } finally {
-    loginInProgress = false;
-
-    if (Date.now() >= loginLockedUntil) {
-      document.getElementById("loginBtn").disabled = false;
-    }
-  }
+if(!email || !password){
+message("authStatus","Enter your email and password.");
+return;
 }
 
+loginInProgress=true;
+document.getElementById("loginBtn").disabled=true;
+
+message("authStatus","Logging in...");
+
+try{
+const {data,error}=await db.auth.signInWithPassword({email,password});
+
+if(error){
+message("authStatus",error.message);
+return;
+}
+
+await loadAccount(data.user);
+message("authStatus","Login successful!");
+
+}catch(error){
+message("authStatus","Login failed: "+error.message);
+}finally{
+loginInProgress=false;
+document.getElementById("loginBtn").disabled=false;
+}
+}
 
 // FORGOT PASSWORD
 
-async function resetPassword() {
-  const email = document.getElementById("email").value.trim();
+async function resetPassword(){
+const email=document.getElementById("email").value.trim();
 
-  if (!email) {
-    message("resetStatus", "Please enter your email address first.");
-    return;
-  }
-
-  message("resetStatus", "Sending password reset email...");
-
-  const {error} = await db.auth.resetPasswordForEmail(email);
-
-  if (error) {
-    message("resetStatus", error.message);
-    return;
-  }
-
-  message(
-    "resetStatus",
-    "Password reset instructions have been sent if this email is registered."
-  );
+if(!email){
+message("resetStatus","Enter your email address first.");
+return;
 }
 
+const {error}=await db.auth.resetPasswordForEmail(email);
+
+if(error){
+message("resetStatus",error.message);
+return;
+}
+
+message("resetStatus","Password reset instructions have been sent if your email is registered.");
+}
 
 // LOAD ACCOUNT
 
-async function loadAccount(user) {
-  currentUser = user;
+async function loadAccount(user){
+currentUser=user;
 
-  const {data, error} = await db
-    .from("profiles")
-    .select("*")
-    .eq("id", user.id)
-    .maybeSingle();
+const {data,error}=await db.from("profiles")
+.select("*")
+.eq("id",user.id)
+.maybeSingle();
 
-  if (error) {
-    message("authStatus", "Could not load profile: " + error.message);
-    return;
-  }
-
-  currentProfile = data;
-
-  if (!currentProfile) {
-    const {data: newProfile, error: profileError} = await db
-      .from("profiles")
-      .insert({
-        id: user.id,
-        full_name: "",
-        username: user.email.split("@")[0],
-        role: "buyer"
-      })
-      .select()
-      .single();
-
-    if (profileError) {
-      message("authStatus", "Profile setup error: " + profileError.message);
-      return;
-    }
-
-    currentProfile = newProfile;
-  }
-
-  document.getElementById("loggedOut").classList.add("hidden");
-  document.getElementById("loggedIn").classList.remove("hidden");
-  document.getElementById("logoutBtn").classList.remove("hidden");
-
-  document.getElementById("welcome").textContent =
-    "Welcome, " + (currentProfile.full_name || currentProfile.username || "NOVÉA member");
-
-  document.getElementById("userEmail").textContent = user.email;
-
-  document.getElementById("userRole").textContent =
-    "Account type: " + currentProfile.role;
-
-  await loadShop();
+if(error){
+message("authStatus","Could not load profile: "+error.message);
+return;
 }
 
+currentProfile=data;
 
-// LOAD SELLER SHOP
+if(!currentProfile){
+const {data:newProfile,error:profileError}=await db.from("profiles")
+.insert({
+id:user.id,
+full_name:"",
+username:user.email.split("@")[0],
+role:"buyer"
+})
+.select()
+.single();
 
-async function loadShop() {
-  if (!currentUser) return;
-
-  const {data, error} = await db
-    .from("shops")
-    .select("*")
-    .eq("seller_id", currentUser.id)
-    .maybeSingle();
-
-  if (error) {
-    message("shopCreateStatus", error.message);
-    return;
-  }
-
-  currentShop = data;
-
-  if (currentShop) {
-    document.getElementById("shopForm").classList.add("hidden");
-    document.getElementById("listingForm").classList.remove("hidden");
-
-    document.getElementById("shopCreateStatus").textContent =
-      "Your shop: " + currentShop.shop_name;
-
-  } else {
-    document.getElementById("shopForm").classList.remove("hidden");
-    document.getElementById("listingForm").classList.add("hidden");
-  }
+if(profileError){
+message("authStatus","Profile setup error: "+profileError.message);
+return;
 }
 
+currentProfile=newProfile;
+}
+
+document.getElementById("loggedOut").classList.add("hidden");
+document.getElementById("loggedIn").classList.remove("hidden");
+document.getElementById("logoutBtn").classList.remove("hidden");
+
+document.getElementById("welcome").textContent=
+"Welcome, "+(currentProfile.full_name||currentProfile.username||"NOVÉA member");
+
+document.getElementById("userEmail").textContent=user.email;
+document.getElementById("userRole").textContent="Account type: "+currentProfile.role;
+
+await loadShop();
+}
+
+// LOAD SHOP
+
+async function loadShop(){
+if(!currentUser)return;
+
+const {data,error}=await db.from("shops")
+.select("*")
+.eq("seller_id",currentUser.id)
+.maybeSingle();
+
+if(error){
+message("shopCreateStatus",error.message);
+return;
+}
+
+currentShop=data;
+
+if(currentShop){
+document.getElementById("shopForm").classList.add("hidden");
+document.getElementById("listingForm").classList.remove("hidden");
+
+await loadSellerListings();
+
+}else{
+document.getElementById("shopForm").classList.remove("hidden");
+document.getElementById("listingForm").classList.add("hidden");
+document.getElementById("sellerProducts").textContent="Create your shop to start listing products.";
+}
+}
 
 // CREATE SHOP
 
-async function createShop() {
-  if (!currentUser) {
-    alert("Please log in first.");
-    return;
-  }
+async function createShop(){
+if(!currentUser)return;
 
-  const shopName = document.getElementById("shopName").value.trim();
-  const description = document.getElementById("shopDescription").value.trim();
+const shopName=document.getElementById("shopName").value.trim();
+const description=document.getElementById("shopDescription").value.trim();
 
-  if (!shopName) {
-    message("shopCreateStatus", "Please enter a shop name.");
-    return;
-  }
-
-  message("shopCreateStatus", "Creating your shop...");
-
-  const {error} = await db.from("shops").insert({
-    seller_id: currentUser.id,
-    shop_name: shopName,
-    description
-  });
-
-  if (error) {
-    message("shopCreateStatus", error.message);
-    return;
-  }
-
-  const {error: roleError} = await db.from("profiles")
-    .update({role: "seller"})
-    .eq("id", currentUser.id);
-
-  await loadAccount(currentUser);
-
-  if (roleError) {
-    message(
-      "shopCreateStatus",
-      "Shop created, but seller role update failed: " + roleError.message
-    );
-    return;
-  }
-
-  message("shopCreateStatus", "Your shop is ready!");
+if(!shopName){
+message("shopCreateStatus","Please enter a shop name.");
+return;
 }
 
+message("shopCreateStatus","Creating your shop...");
+
+const {error}=await db.from("shops").insert({
+seller_id:currentUser.id,
+shop_name:shopName,
+description
+});
+
+if(error){
+message("shopCreateStatus",error.message);
+return;
+}
+
+const {error:roleError}=await db.from("profiles")
+.update({role:"seller"})
+.eq("id",currentUser.id);
+
+if(roleError){
+message("shopCreateStatus","Shop created, but role update failed: "+roleError.message);
+}
+
+await loadAccount(currentUser);
+message("shopCreateStatus","Your shop is ready!");
+}
 
 // ADD PRODUCT
 
-async function addProduct() {
-  if (!currentUser || !currentShop) {
-    message("listingStatus", "Please log in and create a shop first.");
-    return;
-  }
-
-  const title = document.getElementById("productTitle").value.trim();
-  const description = document.getElementById("productDescription").value.trim();
-  const category = document.getElementById("productCategory").value;
-  const brand = document.getElementById("productBrand").value;
-  const size = document.getElementById("productSize").value;
-  const condition = document.getElementById("productCondition").value;
-  const price = Number(document.getElementById("productPrice").value);
-  const file = document.getElementById("productImage").files[0];
-
-  if (!title || !price || price <= 0 || !file) {
-    message("listingStatus", "Enter a title, valid price and product photo.");
-    return;
-  }
-
-  if (file.size > 5 * 1024 * 1024) {
-    message("listingStatus", "Please choose an image smaller than 5 MB.");
-    return;
-  }
-
-  message("listingStatus", "Uploading your product photo...");
-
-  const extension = file.name.split(".").pop().toLowerCase();
-  const safeExtension = /^[a-z0-9]+$/.test(extension) ? extension : "jpg";
-
-  const imagePath =
-    currentUser.id + "/" + crypto.randomUUID() + "." + safeExtension;
-
-  const {error: uploadError} = await db.storage
-    .from("product-images")
-    .upload(imagePath, file, {
-      cacheControl: "3600",
-      upsert: false,
-      contentType: file.type
-    });
-
-  if (uploadError) {
-    message("listingStatus", "Photo upload failed: " + uploadError.message);
-    return;
-  }
-
-  const {data: imageData} = db.storage
-    .from("product-images")
-    .getPublicUrl(imagePath);
-
-  message("listingStatus", "Saving your listing...");
-
-  const {error} = await db.from("products").insert({
-    seller_id: currentUser.id,
-    shop_id: currentShop.id,
-    title,
-    description,
-    category,
-    brand,
-    size,
-    condition,
-    price,
-    image_url: imageData.publicUrl,
-    status: "active"
-  });
-
-  if (error) {
-    message("listingStatus", "Listing failed: " + error.message);
-    return;
-  }
-
-  message("listingStatus", "Your product is now listed!");
-
-  document.getElementById("productTitle").value = "";
-  document.getElementById("productDescription").value = "";
-  document.getElementById("productBrand").value = "";
-  document.getElementById("productSize").value = "";
-  document.getElementById("productPrice").value = "";
-  document.getElementById("productImage").value = "";
-
-  document.getElementById("imagePreview").style.display = "none";
-
-  await loadProducts();
+async function addProduct(){
+if(!currentUser||!currentShop){
+message("listingStatus","Please log in and create a shop first.");
+return;
 }
 
+const title=document.getElementById("productTitle").value.trim();
+const description=document.getElementById("productDescription").value.trim();
+const category=document.getElementById("productCategory").value;
+const brand=document.getElementById("productBrand").value;
+const size=document.getElementById("productSize").value;
+const condition=document.getElementById("productCondition").value;
+const price=Number(document.getElementById("productPrice").value);
+const file=document.getElementById("productImage").files[0];
 
-// LOAD PRODUCTS
-
-async function loadProducts() {
-  const container = document.getElementById("products");
-
-  container.innerHTML = "<p>Loading products...</p>";
-
-  const {data, error} = await db
-    .from("products")
-    .select("*")
-    .eq("status", "active")
-    .order("created_at", {ascending: false});
-
-  if (error) {
-    container.innerHTML = "";
-    message("shopStatus", "Could not load products: " + error.message);
-    return;
-  }
-
-  allProducts = data || [];
-
-  renderProducts();
+if(!title||!price||price<=0||!file){
+message("listingStatus","Enter a title, valid price and product photo.");
+return;
 }
 
+if(!file.type.startsWith("image/")||file.size>5*1024*1024){
+message("listingStatus","Please select a valid image smaller than 5 MB.");
+return;
+}
+
+const publishBtn=document.getElementById("publishBtn");
+publishBtn.disabled=true;
+
+try{
+message("listingStatus","Uploading photo...");
+
+const extension=file.name.split(".").pop().toLowerCase();
+const safeExtension=/^[a-z0-9]+$/.test(extension)?extension:"jpg";
+
+const imagePath=currentUser.id+"/"+crypto.randomUUID()+"."+safeExtension;
+
+const {error:uploadError}=await db.storage.from("product-images")
+.upload(imagePath,file,{
+cacheControl:"3600",
+upsert:false,
+contentType:file.type
+});
+
+if(uploadError){
+message("listingStatus","Upload failed: "+uploadError.message);
+return;
+}
+
+const {data:imageData}=db.storage.from("product-images").getPublicUrl(imagePath);
+
+message("listingStatus","Saving your listing...");
+
+const {error}=await db.from("products").insert({
+seller_id:currentUser.id,
+shop_id:currentShop.id,
+title,
+description,
+category,
+brand,
+size,
+condition,
+price,
+image_url:imageData.publicUrl,
+status:"active"
+});
+
+if(error){
+message("listingStatus","Listing failed: "+error.message);
+return;
+}
+
+message("listingStatus","Your product is now listed!");
+
+document.getElementById("productTitle").value="";
+document.getElementById("productDescription").value="";
+document.getElementById("productBrand").value="";
+document.getElementById("productSize").value="";
+document.getElementById("productPrice").value="";
+document.getElementById("productImage").value="";
+document.getElementById("imagePreview").style.display="none";
+
+await loadProducts();
+await loadSellerListings();
+
+}catch(error){
+message("listingStatus","Error: "+error.message);
+}finally{
+publishBtn.disabled=false;
+}
+}
+
+// LOAD SELLER'S OWN LISTINGS
+
+async function loadSellerListings(){
+const container=document.getElementById("sellerProducts");
+
+if(!currentUser){
+container.textContent="Please log in first.";
+return;
+}
+
+container.textContent="Loading your listings...";
+
+const {data,error}=await db.from("products")
+.select("*")
+.eq("seller_id",currentUser.id)
+.order("created_at",{ascending:false});
+
+if(error){
+container.textContent="Could not load listings: "+error.message;
+return;
+}
+
+container.innerHTML="";
+
+if(!data||data.length===0){
+container.textContent="You haven't listed any products yet.";
+return;
+}
+
+data.forEach(product=>{
+const item=document.createElement("div");
+item.className="seller-item";
+
+const img=document.createElement("img");
+img.src=product.image_url||"";
+img.alt=product.title||"Product";
+img.loading="lazy";
+
+const details=document.createElement("div");
+
+const heading=document.createElement("h3");
+heading.textContent=product.title||"Untitled product";
+
+const price=document.createElement("p");
+price.textContent="$"+Number(product.price).toFixed(2);
+
+const category=document.createElement("p");
+category.textContent=(product.brand||"")+
+(product.brand?" · ":"")+
+(product.category||"");
+
+const status=document.createElement("p");
+status.textContent="Status: "+(product.status||"unknown");
+
+const deleteButton=document.createElement("button");
+deleteButton.className="btn danger";
+deleteButton.textContent="DELETE LISTING";
+deleteButton.onclick=()=>deleteProduct(product.id,deleteButton);
+
+details.append(heading,price,category,status,deleteButton);
+item.append(img,details);
+container.appendChild(item);
+});
+}
+
+// DELETE SELLER'S OWN LISTING
+
+async function deleteProduct(productId,button){
+
+if(!currentUser){
+message("deleteStatus","Please log in first.");
+return;
+}
+
+const confirmed=confirm(
+"Are you sure you want to delete this listing?\n\nThis action cannot be undone."
+);
+
+if(!confirmed)return;
+
+button.disabled=true;
+button.textContent="DELETING...";
+
+message("deleteStatus","Deleting listing...");
+
+const {data,error}=await db.from("products")
+.delete()
+.eq("id",productId)
+.eq("seller_id",currentUser.id)
+.select("id");
+
+if(error){
+button.disabled=false;
+button.textContent="DELETE LISTING";
+message("deleteStatus","Could not delete listing: "+error.message);
+return;
+}
+
+if(!data||data.length===0){
+button.disabled=false;
+button.textContent="DELETE LISTING";
+message("deleteStatus","Listing not deleted. You may not own this product.");
+return;
+}
+
+message("deleteStatus","Your listing has been successfully deleted!");
+
+await loadSellerListings();
+await loadProducts();
+}
+
+// LOAD PUBLIC PRODUCTS
+
+async function loadProducts(){
+const container=document.getElementById("products");
+
+container.textContent="Loading products...";
+
+const {data,error}=await db.from("products")
+.select("*")
+.eq("status","active")
+.order("created_at",{ascending:false});
+
+if(error){
+container.textContent="Could not load products: "+error.message;
+return;
+}
+
+allProducts=data||[];
+renderProducts();
+}
 
 // DISPLAY PRODUCTS
 
-function renderProducts() {
-  const container = document.getElementById("products");
-  const query = document.getElementById("search").value.toLowerCase();
+function renderProducts(){
+const container=document.getElementById("products");
+const query=document.getElementById("search").value.toLowerCase();
 
-  const filtered = allProducts.filter(p => {
-    const categoryMatch =
-      selectedCategory === "All" || p.category === selectedCategory;
+const filtered=allProducts.filter(p=>{
+const categoryMatch=selectedCategory==="All"||p.category===selectedCategory;
 
-    const searchMatch =
-      [p.title, p.description, p.brand, p.category]
-      .filter(Boolean)
-      .join(" ")
-      .toLowerCase()
-      .includes(query);
+const searchMatch=[p.title,p.description,p.brand,p.category]
+.filter(Boolean).join(" ").toLowerCase().includes(query);
 
-    return categoryMatch && searchMatch;
-  });
+return categoryMatch&&searchMatch;
+});
 
-  container.innerHTML = "";
+container.innerHTML="";
 
-  if (!filtered.length) {
-    container.innerHTML = "<p>No products found. Check back soon!</p>";
-    return;
-  }
-
-  filtered.forEach(p => {
-    const card = document.createElement("article");
-    card.className = "product";
-
-    const img = document.createElement("img");
-    img.src = p.image_url || "";
-    img.alt = p.title || "Product";
-    img.loading = "lazy";
-
-    const heading = document.createElement("h3");
-    heading.textContent = p.title || "Untitled product";
-
-    const price = document.createElement("p");
-    price.textContent = "$" + Number(p.price).toFixed(2);
-
-    const details = document.createElement("p");
-    details.textContent = [p.brand, p.size, p.condition]
-      .filter(Boolean).join(" · ");
-
-    const category = document.createElement("p");
-    category.textContent = p.category || "";
-
-    card.append(img, heading, price, details, category);
-
-    container.appendChild(card);
-  });
+if(!filtered.length){
+container.textContent="No products found. Check back soon!";
+return;
 }
 
+filtered.forEach(p=>{
+const card=document.createElement("article");
+card.className="product";
 
-// FILTER CATEGORY
+const img=document.createElement("img");
+img.src=p.image_url||"";
+img.alt=p.title||"Product";
+img.loading="lazy";
 
-function filterCategory(category) {
-  selectedCategory = category;
+const heading=document.createElement("h3");
+heading.textContent=p.title||"Untitled product";
 
-  document.getElementById("search").value = "";
+const price=document.createElement("p");
+price.textContent="$"+Number(p.price).toFixed(2);
 
-  renderProducts();
+const details=document.createElement("p");
+details.textContent=[p.brand,p.size,p.condition].filter(Boolean).join(" · ");
 
-  document.getElementById("shop").scrollIntoView({
-    behavior: "smooth"
-  });
+const category=document.createElement("p");
+category.textContent=p.category||"";
+
+card.append(img,heading,price,details,category);
+container.appendChild(card);
+});
 }
 
+// CATEGORY FILTER
+
+function filterCategory(category){
+selectedCategory=category;
+document.getElementById("search").value="";
+renderProducts();
+
+document.getElementById("shop").scrollIntoView({
+behavior:"smooth"
+});
+}
 
 // SELLER DASHBOARD
 
-function showSeller() {
-  if (!currentUser) {
-    document.getElementById("account").scrollIntoView({
-      behavior: "smooth"
-    });
-    return;
-  }
-
-  document.getElementById("sell").classList.remove("hidden");
-
-  document.getElementById("sell").scrollIntoView({
-    behavior: "smooth"
-  });
-
-  loadShop();
+function showSeller(){
+if(!currentUser){
+document.getElementById("account").scrollIntoView({
+behavior:"smooth"
+});
+return;
 }
 
+document.getElementById("sell").classList.remove("hidden");
+
+document.getElementById("sell").scrollIntoView({
+behavior:"smooth"
+});
+
+loadShop();
+}
 
 // LOG OUT
 
-async function logout() {
-  const {error} = await db.auth.signOut();
+async function logout(){
+const {error}=await db.auth.signOut();
 
-  if (error) {
-    alert(error.message);
-    return;
-  }
-
-  currentUser = null;
-  currentProfile = null;
-  currentShop = null;
-
-  document.getElementById("loggedIn").classList.add("hidden");
-  document.getElementById("loggedOut").classList.remove("hidden");
-  document.getElementById("logoutBtn").classList.add("hidden");
-  document.getElementById("sell").classList.add("hidden");
-
-  message("authStatus", "You have logged out.");
+if(error){
+alert(error.message);
+return;
 }
 
-document.getElementById("logoutBtn").addEventListener("click", logout);
+currentUser=null;
+currentProfile=null;
+currentShop=null;
 
+document.getElementById("loggedIn").classList.add("hidden");
+document.getElementById("loggedOut").classList.remove("hidden");
+document.getElementById("logoutBtn").classList.add("hidden");
+document.getElementById("sell").classList.add("hidden");
 
-// SUPABASE AUTHENTICATION LISTENER
+message("authStatus","You have logged out.");
+}
 
-db.auth.onAuthStateChange((event, session) => {
-  if (event === "SIGNED_IN" && session) {
-    setTimeout(() => loadAccount(session.user), 0);
-  }
+document.getElementById("logoutBtn").addEventListener("click",logout);
+
+// AUTHENTICATION LISTENER
+
+db.auth.onAuthStateChange((event,session)=>{
+if(event==="SIGNED_IN"&&session){
+setTimeout(()=>loadAccount(session.user),0);
+}
+
+if(event==="SIGNED_OUT"){
+currentUser=null;
+currentProfile=null;
+currentShop=null;
+}
 });
-
 
 // INITIALIZE WEBSITE
 
-async function initialize() {
-  const {data} = await db.auth.getSession();
+async function initialize(){
+const {data}=await db.auth.getSession();
 
-  if (data.session) {
-    await loadAccount(data.session.user);
-  }
+if(data.session){
+await loadAccount(data.session.user);
+}
 
-  await loadProducts();
+await loadProducts();
 }
 
 initialize();
 
 </script>
-
 </body>
 </html>
