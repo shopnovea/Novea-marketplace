@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOVÉA | Our Collection</title>
+<meta name="description" content="Shop curated pre-loved fashion at NOVÉA.">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:#f5f1eb;
+color:#493e34;
+font-family:Arial,sans-serif;
+}
+
+header{
+text-align:center;
+padding:25px;
+border-bottom:1px solid #ddd4c8;
+}
+
+.logo{
+font:42px Georgia;
+letter-spacing:8px;
+margin:0;
+}
+
+.tagline{
+font-size:10px;
+letter-spacing:4px;
+margin-top:10px;
+}
+
+nav{
+display:flex;
+justify-content:center;
+gap:22px;
+flex-wrap:wrap;
+padding:18px;
+}
+
+nav a{
+color:#493e34;
+text-decoration:none;
+font-size:12px;
+}
+
+nav a:hover{
+text-decoration:underline;
+}
+
+.hero{
+background:#eae3d8;
+text-align:center;
+padding:45px 20px;
+}
+
+.hero h2{
+font:normal 42px Georgia;
+margin:15px 0;
+}
+
+.hero p{
+font-size:13px;
+line-height:1.8;
+}
+
+section{
+padding:40px 6%;
+}
+
+.title{
+text-align:center;
+font:normal 32px Georgia;
+margin-bottom:28px;
+}
+
+.categories{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
+max-width:1000px;
+margin:auto;
+}
+
+.category{
+background:#e6ddd1;
+text-align:center;
+padding:25px 5px;
+font:22px Georgia;
+cursor:pointer;
+border:0;
+color:#493e34;
+}
+
+.category:hover,
+.category.active{
+background:#493e34;
+color:white;
+}
+
+.search{
+display:block;
+width:100%;
+max-width:500px;
+margin:0 auto 25px;
+padding:14px;
+border:1px solid #cfc4b7;
+background:#fffefa;
+font-size:14px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
+}
+
+.product{
+background:#fffefa;
+padding-bottom:15px;
+overflow:hidden;
+}
+
+.product img{
+width:100%;
+aspect-ratio:3/4;
+object-fit:cover;
+background:#eae3d8;
+display:block;
+}
+
+.product h3,
+.product p{
+padding:0 12px;
+}
+
+.product h3{
+font:19px Georgia;
+margin-bottom:8px;
+}
+
+.product p{
+font-size:13px;
+line-height:1.5;
+}
+
+.price{
+font-weight:bold;
+}
+
+.status{
+text-align:center;
+font-size:13px;
+min-height:20px;
+margin:20px;
+}
+
+.empty{
+text-align:center;
+padding:40px 15px;
+background:#fffefa;
+line-height:1.8;
+}
+
+.reset{
+display:block;
+margin:15px auto;
+padding:10px 20px;
+background:#493e34;
+color:white;
+border:0;
+cursor:pointer;
+}
+
+footer{
+background:#493e34;
+color:white;
+text-align:center;
+padding:35px;
+}
+
+footer h2{
+font-family:Georgia;
+letter-spacing:6px;
+}
+
+@media(max-width:650px){
+.categories,.products{
+grid-template-columns:repeat(2,1fr);
+}
+
+.hero h2{
+font-size:34px;
+}
+
+nav{
+gap:13px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1 class="logo">NOVÉA</h1>
+<div class="tagline">PRE-LOVED. REIMAGINED.</div>
+</header>
+
+<nav>
+<a href="index.html">HOME</a>
+<a href="collection.html">SHOP</a>
+<a href="#categories">CATEGORIES</a>
+<a href="upload.html">SELL WITH US</a>
+<a href="index.html#account">MY ACCOUNT</a>
+</nav>
+
+<div class="hero">
+<p>A MORE CONSIDERED WARDROBE</p>
+<h2>Discover the Collection</h2>
+<p>Beautiful pre-loved fashion. Exceptional pieces deserve a second life.</p>
+</div>
+
+<section id="categories">
+
+<h2 class="title">Shop by category</h2>
+
+<div class="categories">
+
+<button class="category active" onclick="filterCategory('All',this)">
+All
+</button>
+
+<button class="category" onclick="filterCategory('Women',this)">
+Women
+</button>
+
+<button class="category" onclick="filterCategory('Men',this)">
+Men
+</button>
+
+<button class="category" onclick="filterCategory('Bags',this)">
+Handbags
+</button>
+
+<button class="category" onclick="filterCategory('Shoes',this)">
+Shoes
+</button>
+
+</div>
+</section>
+
+<section id="shop">
+
+<h2 class="title">Our Collection</h2>
+
+<input
+class="search"
+id="search"
+type="search"
+placeholder="Search products, brands or categories..."
+oninput="renderProducts()">
+
+<p class="status" id="shopStatus">Loading our collection...</p>
+
+<div class="products" id="products"></div>
+
+</section>
+
+<footer>
+<h2>NOVÉA</h2>
+PRE-LOVED. REIMAGINED.
+<p>Discover. Rewear. Repeat.</p>
+<p><a href="index.html" style="color:white">Return to homepage</a></p>
+<p>© 2026 NOVÉA</p>
+</footer>
+
+<script>
+
+// SUPABASE CONNECTION
+
+const SUPABASE_URL =
+"https://tcodkriyrwlzdrqfzwyb.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_scjOBsZKxD2pfmI2fgGG9w_n8vIXU0q";
+
+const db = window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+let allProducts = [];
+let selectedCategory = "All";
+
+// LOAD PRODUCTS
+
+async function loadProducts(){
+
+const container = document.getElementById("products");
+const status = document.getElementById("shopStatus");
+
+status.textContent = "Loading our collection...";
+container.innerHTML = "";
+
+try{
+
+const {data,error} = await db
+.from("products")
+.select("id,title,description,category,brand,size,condition,price,image_url,status,created_at")
+.eq("status","active")
+.order("created_at",{ascending:false});
+
+if(error){
+throw error;
+}
+
+allProducts = data || [];
+
+renderProducts();
+
+}catch(error){
+
+status.textContent =
+"Could not load collection: " + error.message;
+
+}
+}
+
+// DISPLAY PRODUCTS
+
+function renderProducts(){
+
+const container = document.getElementById("products");
+const status = document.getElementById("shopStatus");
+
+const query = document
+.getElementById("search")
+.value
+.trim()
+.toLowerCase();
+
+const filtered = allProducts.filter(product=>{
+
+const categoryMatch =
+selectedCategory === "All" ||
+product.category === selectedCategory;
+
+const searchMatch = [
+product.title,
+product.description,
+product.brand,
+product.category,
+product.size,
+product.condition
+]
+.filter(Boolean)
+.join(" ")
+.toLowerCase()
+.includes(query);
+
+return categoryMatch && searchMatch;
+
+});
+
+container.innerHTML = "";
+
+status.textContent =
+filtered.length + (filtered.length === 1 ? " item" : " items");
+
+if(filtered.length === 0){
+
+container.innerHTML =
+'<div class="empty">No products found.<br>Check back soon for more beautiful finds.</div>';
+
+return;
+
+}
+
+filtered.forEach(product=>{
+
+const card = document.createElement("article");
+card.className = "product";
+
+const img = document.createElement("img");
+img.src = product.image_url || "";
+img.alt = product.title || "Product";
+img.loading = "lazy";
+
+const heading = document.createElement("h3");
+heading.textContent = product.title || "Untitled product";
+
+const price = document.createElement("p");
+price.className = "price";
+price.textContent =
+"$" + Number(product.price).toFixed(2);
+
+const details = document.createElement("p");
+
+details.textContent = [
+product.brand,
+product.size,
+product.condition
+].filter(Boolean).join(" · ");
+
+const category = document.createElement("p");
+category.textContent = product.category || "";
+
+card.append(
+img,
+heading,
+price,
+details,
+category
+);
+
+container.appendChild(card);
+
+});
+
+}
+
+// CATEGORY FILTER
+
+function filterCategory(category,button){
+
+selectedCategory = category;
+
+document
+.querySelectorAll(".category")
+.forEach(item=>item.classList.remove("active"));
+
+button.classList.add("active");
+
+document.getElementById("search").value = "";
+
+renderProducts();
+
+document.getElementById("shop").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+// INITIALIZE
+
+loadProducts();
+
+</script>
+
+</body>
+</html>
