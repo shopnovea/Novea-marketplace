@@ -421,21 +421,17 @@ currentShop = data;
 if(currentShop){
 
 document.getElementById("shopForm").classList.add("hidden");
-document.getElementById("shopInfo").classList.remove("hidden");
 document.getElementById("myListings").classList.remove("hidden");
-
-message("shopHeading",currentShop.shop_name);
-message("shopDescriptionText",currentShop.description||"Welcome to your shop.");
 
 await loadSellerListings();
 
 }else{
 
 document.getElementById("shopForm").classList.remove("hidden");
-document.getElementById("shopInfo").classList.add("hidden");
 document.getElementById("myListings").classList.add("hidden");
 
 }
+
 }
 
 // CREATE SHOP
