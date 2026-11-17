@@ -78,7 +78,9 @@ nav{gap:13px}
 <a href="collection.html">SHOP</a>
 <a href="collection.html#categories">CATEGORIES</a>
 <a href="upload.html">SELL WITH US</a>
-<a href="index.html#account">MY ACCOUNT</a>
+
+<a href="index.html#account" id="loginNav">LOG IN</a>
+
 <button id="logoutBtn" class="hidden">LOG OUT</button>
 </nav>
   
@@ -564,6 +566,8 @@ currentProfile=newProfile;
 
 document.getElementById("loggedOut").classList.add("hidden");
 document.getElementById("loggedIn").classList.remove("hidden");
+
+document.getElementById("loginNav").classList.add("hidden");
 document.getElementById("logoutBtn").classList.remove("hidden");
 
 document.getElementById("welcome").textContent=
@@ -963,7 +967,10 @@ currentShop=null;
 
 document.getElementById("loggedIn").classList.add("hidden");
 document.getElementById("loggedOut").classList.remove("hidden");
+
+document.getElementById("loginNav").classList.remove("hidden");
 document.getElementById("logoutBtn").classList.add("hidden");
+
 document.getElementById("sell").classList.add("hidden");
 
 message("authStatus","You have logged out.");
