@@ -237,7 +237,9 @@ Create an account or reset your password
 
 <section id="dashboardSection" class="hidden">
 
-<h2 class="title" id="welcome"></h2>
+<h2 class="title">My Items</h2>
+
+<p class="status" id="welcome"></p>
 
 <p class="status" id="userEmail"></p>
 
@@ -264,19 +266,6 @@ CREATE MY SHOP
 
 </div>
 
-<!-- SHOP INFORMATION -->
-
-<div class="panel hidden" id="shopInfo">
-
-<h2 id="shopHeading">Your Shop</h2>
-
-<p id="shopDescriptionText"></p>
-
-<div style="text-align:center;margin-top:20px">
-<a href="upload.html" class="btn">+ ADD NEW ITEM</a>
-</div>
-
-</div>
 
 <!-- MY LISTINGS -->
 
@@ -292,16 +281,19 @@ Loading your listings...
 
 <p class="status" id="deleteStatus"></p>
 
-<div style="text-align:center">
+<div style="text-align:center;margin-top:30px">
+
 <button class="btn" onclick="loadSellerListings()">
-REFRESH MY LISTINGS
+REFRESH MY ITEMS
 </button>
+
+<a href="upload.html" class="btn">
++ ADD A NEW ITEM
+</a>
 
 <a href="collection.html" class="btn">
 VIEW COLLECTION
 </a>
-</div>
-
 </div>
 
 </section>
@@ -387,7 +379,7 @@ document.getElementById("loginSection").classList.add("hidden");
 document.getElementById("dashboardSection").classList.remove("hidden");
 document.getElementById("logoutBtn").classList.remove("hidden");
 
-message("welcome","Welcome to your Seller Dashboard");
+message("welcome","Manage your NOVÉA listings");
 message("userEmail",user.email);
 
 const {data:profile,error:profileError} = await db
