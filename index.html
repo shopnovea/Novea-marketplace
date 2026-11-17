@@ -12,50 +12,89 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#f5f1eb;color:#493e34;font-family:Arial,sans-serif}
+
 header{text-align:center;padding:25px;border-bottom:1px solid #ddd4c8}
 .logo{font:42px Georgia;letter-spacing:8px;margin:0}
 .tagline{font-size:10px;letter-spacing:4px;margin-top:10px}
+
 nav{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;padding:18px}
 nav a,nav button{color:#493e34;text-decoration:none;font-size:12px;background:none;border:0;cursor:pointer}
+
 button,.btn{cursor:pointer}
 button:disabled{opacity:.5;cursor:not-allowed}
+
 .btn{display:inline-block;background:#493e34;color:white;padding:13px 22px;border:0;text-decoration:none;font-size:12px;letter-spacing:1px;margin:5px}
 .danger{background:#934b40}
+
 .hero{background:#eae3d8;text-align:center;padding:65px 20px}
 .hero h2{font:normal 48px Georgia;margin:20px 0}
 .hero p{line-height:1.8;max-width:480px;margin:20px auto}
+
 .coming-soon{background:#f5f1eb;padding:30px 20px;margin:0 auto 35px;max-width:650px;border:1px solid #d8cabb}
 .coming-soon h2{font:normal 32px Georgia;margin:18px 0}
 .coming-label{font-size:10px;letter-spacing:4px}
 .coming-soon p{font-size:13px;line-height:1.8;max-width:420px;margin:15px auto}
 .coming-soon span{font-size:10px;letter-spacing:3px}
+
 section{padding:40px 6%}
 .title{text-align:center;font:normal 32px Georgia;margin-bottom:28px}
+
 .categories,.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .category{background:#e6ddd1;text-align:center;padding:30px 5px;font:22px Georgia;cursor:pointer}
 .category:hover{background:#d8cabb}
+
 .product{background:#fffefa;padding-bottom:15px;overflow:hidden}
 .product img{width:100%;aspect-ratio:3/4;object-fit:cover;background:#eae3d8}
 .product h3,.product p{padding:0 12px}
 .product h3{font:19px Georgia}
 .product p{font-size:13px}
+
 .search{display:block;width:100%;max-width:450px;margin:0 auto 25px;padding:14px;border:1px solid #cfc4b7}
+
 .panel{max-width:600px;margin:25px auto;background:#fffefa;padding:25px;text-align:left}
 .panel input,.panel textarea,.panel select{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #cfc4b7;font:14px Arial;background:white}
 .panel label{font-size:12px}
 .panel h2{font:26px Georgia}
+
 .hidden{display:none!important}
 .status{text-align:center;font-size:13px;min-height:20px;margin:12px}
 .account{background:#eae3d8;text-align:center;padding:35px 15px}
+
 #imagePreview{display:none;width:100%;max-width:300px;max-height:350px;margin:15px auto;object-fit:contain}
 .photo-help{font-size:12px;color:#897d70;line-height:1.6}
+
 footer{background:#493e34;color:white;text-align:center;padding:35px}
 footer h2{font-family:Georgia;letter-spacing:6px}
+
 .seller-item{display:grid;grid-template-columns:100px 1fr;gap:18px;background:#fffefa;padding:15px;margin:15px 0;align-items:center}
 .seller-item img{width:100px;height:125px;object-fit:cover;background:#eae3d8}
 .seller-item h3{font:20px Georgia;margin:5px 0}
 .seller-item p{font-size:13px;line-height:1.5}
 .dashboard-title{font:26px Georgia;margin-top:35px}
+
+/* LOGIN-ONLY VIEW */
+
+body.login-view header,
+body.login-view nav,
+body.login-view #home,
+body.login-view #categories,
+body.login-view #shop,
+body.login-view footer{
+display:none!important;
+}
+
+body.login-view #account{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:25px 15px;
+}
+
+body.login-view #account .panel{
+width:100%;
+}
+
 @media(max-width:650px){
 .categories,.products{grid-template-columns:repeat(2,1fr)}
 .hero h2{font-size:36px}
@@ -78,13 +117,11 @@ nav{gap:13px}
 <a href="collection.html">SHOP</a>
 <a href="collection.html#categories">CATEGORIES</a>
 <a href="upload.html">SELL WITH US</a>
-
-<a href="index.html#account" id="loginNav">LOG IN</a>
-
+<a href="#account" id="loginNav">LOG IN</a>
 <button id="logoutBtn" class="hidden">LOG OUT</button>
 </nav>
-  
-<!-- HOME SECTION -->
+
+<!-- HOME -->
 
 <div class="hero" id="home">
 <div class="coming-soon">
@@ -104,7 +141,6 @@ nav{gap:13px}
 
 <section id="categories">
 <h2 class="title">Shop by category</h2>
-
 <div class="categories">
 <div class="category" onclick="filterCategory('Women')">Women</div>
 <div class="category" onclick="filterCategory('Men')">Men</div>
@@ -113,36 +149,27 @@ nav{gap:13px}
 </div>
 </section>
 
-<!-- SHOP -->
+<!-- COLLECTION -->
 
 <section id="shop">
 <h2 class="title">Our Collection</h2>
-
 <p style="text-align:center;line-height:1.8">
 Discover beautiful pre-loved fashion and give exceptional pieces a new home.
 </p>
-
-<input class="search" id="search"
-placeholder="Search products..."
-oninput="renderProducts()">
-
+<input class="search" id="search" placeholder="Search products..." oninput="renderProducts()">
 <div class="products" id="products">
 <p>Loading collection...</p>
 </div>
-
 <p class="status" id="shopStatus"></p>
 </section>
 
 <!-- CUSTOMER ACCOUNT -->
 
 <section id="account" class="account">
-
 <h2 class="title">Your NOVÉA account</h2>
 
 <div id="loggedOut">
-
 <div class="panel">
-
 <h2>Welcome back</h2>
 <p>Log in or create your account.</p>
 
@@ -153,79 +180,59 @@ oninput="renderProducts()">
 <input id="password" type="password" placeholder="Password">
 
 <button class="btn" id="loginBtn" onclick="login()">LOG IN</button>
-
 <button class="btn" onclick="signup()">CREATE ACCOUNT</button>
 
 <p>
-<a href="#" onclick="resetPassword();return false"
-style="color:#493e34">
+<a href="#" onclick="resetPassword();return false" style="color:#493e34">
 Forgot your password?
 </a>
 </p>
 
 <p class="status" id="authStatus"></p>
 <p class="status" id="resetStatus"></p>
-
 </div>
 </div>
 
-<!-- LOGGED IN ACCOUNT -->
+<!-- LOGGED-IN ACCOUNT -->
 
 <div id="loggedIn" class="hidden">
-
 <h2 id="welcome"></h2>
-
 <p id="userEmail"></p>
-
 <p id="userRole"></p>
-
-<button class="btn" onclick="showSeller()">
-SELLER DASHBOARD
-</button>
-
+<button class="btn" onclick="showSeller()">SELLER DASHBOARD</button>
 </div>
-
 </section>
 
 <!-- SELLER DASHBOARD -->
 
 <section id="sell" class="hidden">
-
 <h2 class="title">Your seller dashboard</h2>
 
 <!-- CREATE SHOP -->
 
 <div class="panel" id="shopForm">
-
 <h2>Create your shop</h2>
 
 <label>Shop name</label>
 <input id="shopName" placeholder="Your shop name">
 
 <label>Shop description</label>
-<textarea id="shopDescription"
-placeholder="Tell buyers about your shop"></textarea>
+<textarea id="shopDescription" placeholder="Tell buyers about your shop"></textarea>
 
-<button class="btn" onclick="createShop()">
-CREATE SHOP
-</button>
-
+<button class="btn" onclick="createShop()">CREATE SHOP</button>
 <p class="status" id="shopCreateStatus"></p>
-
 </div>
 
 <!-- PRODUCT LISTING FORM -->
 
 <div class="panel hidden" id="listingForm">
-
 <h2>List a new item</h2>
 
 <label>Product title</label>
 <input id="productTitle" placeholder="Product name">
 
 <label>Description</label>
-<textarea id="productDescription"
-placeholder="Describe your item"></textarea>
+<textarea id="productDescription" placeholder="Describe your item"></textarea>
 
 <label>Category</label>
 <select id="productCategory">
@@ -242,7 +249,7 @@ placeholder="Describe your item"></textarea>
 <option>Nike</option>
 <option>Adidas</option>
 <option>Zara</option>
-<option>H&M</option>
+<option>H&amp;M</option>
 <option>ASOS</option>
 <option>Ralph Lauren</option>
 <option>Calvin Klein</option>
@@ -257,68 +264,34 @@ placeholder="Describe your item"></textarea>
 
 <label>Size</label>
 <select id="productSize">
-
 <option value="">Select size</option>
-
 <optgroup label="Letter sizes">
-<option>XXS</option>
-<option>XS</option>
-<option>S</option>
-<option>M</option>
-<option>L</option>
-<option>XL</option>
-<option>XXL</option>
-<option>XXXL</option>
+<option>XXS</option><option>XS</option><option>S</option>
+<option>M</option><option>L</option><option>XL</option>
+<option>XXL</option><option>XXXL</option>
 </optgroup>
-
 <optgroup label="Women's US sizes">
-<option>00</option>
-<option>0</option>
-<option>2</option>
-<option>4</option>
-<option>6</option>
-<option>8</option>
-<option>10</option>
-<option>12</option>
-<option>14</option>
-<option>16</option>
-<option>18</option>
-<option>20</option>
-<option>22</option>
-<option>24</option>
+<option>00</option><option>0</option><option>2</option>
+<option>4</option><option>6</option><option>8</option>
+<option>10</option><option>12</option><option>14</option>
+<option>16</option><option>18</option><option>20</option>
+<option>22</option><option>24</option>
 </optgroup>
-
 <optgroup label="Men's waist sizes">
-<option>28</option>
-<option>29</option>
-<option>30</option>
-<option>31</option>
-<option>32</option>
-<option>33</option>
-<option>34</option>
-<option>36</option>
-<option>38</option>
-<option>40</option>
-<option>42</option>
-<option>44</option>
+<option>28</option><option>29</option><option>30</option>
+<option>31</option><option>32</option><option>33</option>
+<option>34</option><option>36</option><option>38</option>
+<option>40</option><option>42</option><option>44</option>
 <option>46</option>
 </optgroup>
-
 <optgroup label="US shoe sizes">
-<option>US Shoe 5</option>
-<option>US Shoe 6</option>
-<option>US Shoe 7</option>
-<option>US Shoe 8</option>
-<option>US Shoe 9</option>
-<option>US Shoe 10</option>
-<option>US Shoe 11</option>
-<option>US Shoe 12</option>
-<option>US Shoe 13</option>
-<option>US Shoe 14</option>
+<option>US Shoe 5</option><option>US Shoe 6</option>
+<option>US Shoe 7</option><option>US Shoe 8</option>
+<option>US Shoe 9</option><option>US Shoe 10</option>
+<option>US Shoe 11</option><option>US Shoe 12</option>
+<option>US Shoe 13</option><option>US Shoe 14</option>
 </optgroup>
-
 <option>One Size</option>
-
 </select>
 
 <label>Condition</label>
@@ -331,20 +304,10 @@ placeholder="Describe your item"></textarea>
 </select>
 
 <label>Price (USD)</label>
-<input id="productPrice"
-type="number"
-min="0.01"
-step="0.01"
-placeholder="85.00">
+<input id="productPrice" type="number" min="0.01" step="0.01" placeholder="85.00">
 
 <label>Take a photo or upload an existing photo</label>
-
-<input
-id="productImage"
-type="file"
-accept="image/*"
-capture="environment"
-onchange="previewProductImage(event)">
+<input id="productImage" type="file" accept="image/*" capture="environment" onchange="previewProductImage(event)">
 
 <p class="photo-help">
 On a phone, choose Camera to take a new picture or Photo Library to select one.
@@ -354,23 +317,15 @@ Maximum image size: 5 MB.
 
 <img id="imagePreview" alt="Product photo preview">
 
-<button class="btn" id="publishBtn" onclick="addProduct()">
-PUBLISH PRODUCT
-</button>
-
+<button class="btn" id="publishBtn" onclick="addProduct()">PUBLISH PRODUCT</button>
 <p class="status" id="listingStatus"></p>
-
 </div>
 
-<!-- MY LISTINGS: NEW SELLER FEATURE -->
+<!-- MY LISTINGS -->
 
 <div class="panel" id="myListings">
-
 <h2 class="dashboard-title">My Listings</h2>
-
-<p>
-Manage the products you have listed on NOVÉA.
-</p>
+<p>Manage the products you have listed on NOVÉA.</p>
 
 <div id="sellerProducts">
 <p>Your listings will appear here.</p>
@@ -378,29 +333,17 @@ Manage the products you have listed on NOVÉA.
 
 <p class="status" id="deleteStatus"></p>
 
-<button class="btn" onclick="loadSellerListings()">
-REFRESH MY LISTINGS
-</button>
-
+<button class="btn" onclick="loadSellerListings()">REFRESH MY LISTINGS</button>
 </div>
-
 </section>
 
-<!-- FOOTER -->
-
 <footer>
-
 <h2>NOVÉA</h2>
-
 PRE-LOVED. REIMAGINED.
-
 <p>Discover. Rewear. Repeat.</p>
-
 <p>© 2026 NOVÉA</p>
-
 </footer>
-
-<script>
+</body>
 
 // SUPABASE CONNECTION
 
@@ -416,9 +359,17 @@ let allProducts = [];
 let selectedCategory = "All";
 let loginInProgress = false;
 
+// HELPER MESSAGE
+
 function message(id,text){
 document.getElementById(id).textContent=text;
 }
+
+// LOGIN-ONLY SCREEN
+
+document.getElementById("loginNav").addEventListener("click",function(){
+document.body.classList.add("login-view");
+});
 
 // IMAGE PREVIEW
 
@@ -431,7 +382,7 @@ preview.style.display="none";
 return;
 }
 
-if(!file.type.startsWith("image/") || file.size>5*1024*1024){
+if(!file.type.startsWith("image/")||file.size>5*1024*1024){
 message("listingStatus","Please select an image smaller than 5 MB.");
 event.target.value="";
 preview.style.display="none";
@@ -449,7 +400,7 @@ async function signup(){
 const email=document.getElementById("email").value.trim();
 const password=document.getElementById("password").value;
 
-if(!email || password.length<6){
+if(!email||password.length<6){
 message("authStatus","Enter an email and a password of at least 6 characters.");
 return;
 }
@@ -479,7 +430,7 @@ if(loginInProgress)return;
 const email=document.getElementById("email").value.trim();
 const password=document.getElementById("password").value;
 
-if(!email || !password){
+if(!email||!password){
 message("authStatus","Enter your email and password.");
 return;
 }
@@ -531,6 +482,7 @@ message("resetStatus","Password reset instructions have been sent if your email 
 // LOAD ACCOUNT
 
 async function loadAccount(user){
+
 currentUser=user;
 
 const {data,error}=await db.from("profiles")
@@ -563,6 +515,10 @@ return;
 
 currentProfile=newProfile;
 }
+
+// RESTORE NORMAL WEBSITE AFTER LOGIN
+
+document.body.classList.remove("login-view");
 
 document.getElementById("loggedOut").classList.add("hidden");
 document.getElementById("loggedIn").classList.remove("hidden");
@@ -605,7 +561,9 @@ await loadSellerListings();
 }else{
 document.getElementById("shopForm").classList.remove("hidden");
 document.getElementById("listingForm").classList.add("hidden");
-document.getElementById("sellerProducts").textContent="Create your shop to start listing products.";
+
+document.getElementById("sellerProducts").textContent=
+"Create your shop to start listing products.";
 }
 }
 
@@ -740,7 +698,7 @@ publishBtn.disabled=false;
 }
 }
 
-// LOAD SELLER'S OWN LISTINGS
+// LOAD SELLER LISTINGS
 
 async function loadSellerListings(){
 const container=document.getElementById("sellerProducts");
@@ -805,10 +763,9 @@ container.appendChild(item);
 });
 }
 
-// DELETE SELLER'S OWN LISTING
+// DELETE LISTING
 
 async function deleteProduct(productId,button){
-
 if(!currentUser){
 message("deleteStatus","Please log in first.");
 return;
@@ -965,6 +922,8 @@ currentUser=null;
 currentProfile=null;
 currentShop=null;
 
+document.body.classList.remove("login-view");
+
 document.getElementById("loggedIn").classList.add("hidden");
 document.getElementById("loggedOut").classList.remove("hidden");
 
@@ -1007,5 +966,4 @@ await loadProducts();
 initialize();
 
 </script>
-</body>
 </html>
