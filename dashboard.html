@@ -50,9 +50,7 @@ text-decoration:none;
 font-size:12px;
 }
 
-button,.btn{
-cursor:pointer;
-}
+button,.btn{cursor:pointer}
 
 .btn{
 display:inline-block;
@@ -66,9 +64,7 @@ letter-spacing:1px;
 margin:5px;
 }
 
-.danger{
-background:#934b40;
-}
+.danger{background:#934b40}
 
 button:disabled{
 opacity:.5;
@@ -85,12 +81,10 @@ padding:40px 20px;
 font:normal 38px Georgia;
 }
 
-section{
-padding:35px 6%;
-}
+section{padding:35px 6%}
 
 .panel{
-max-width:650px;
+max-width:750px;
 margin:25px auto;
 background:#fffefa;
 padding:25px;
@@ -105,13 +99,9 @@ border:1px solid #cfc4b7;
 font:14px Arial;
 }
 
-.panel label{
-font-size:12px;
-}
+.panel label{font-size:12px}
 
-.panel h2{
-font:26px Georgia;
-}
+.panel h2{font:26px Georgia}
 
 .title{
 text-align:center;
@@ -125,23 +115,22 @@ min-height:20px;
 margin:12px;
 }
 
-.hidden{
-display:none!important;
-}
+.hidden{display:none!important}
 
 .seller-item{
 display:grid;
-grid-template-columns:100px 1fr;
+grid-template-columns:110px 1fr;
 gap:18px;
 background:#fffefa;
 padding:15px;
 margin:15px 0;
 align-items:center;
+border:1px solid #e5ddd3;
 }
 
 .seller-item img{
-width:100px;
-height:125px;
+width:110px;
+height:135px;
 object-fit:cover;
 background:#eae3d8;
 }
@@ -154,6 +143,13 @@ margin:5px 0;
 .seller-item p{
 font-size:13px;
 line-height:1.5;
+}
+
+.add-item-area{
+text-align:center;
+margin-top:30px;
+padding-top:20px;
+border-top:1px solid #ddd4c8;
 }
 
 footer{
@@ -170,10 +166,12 @@ letter-spacing:6px;
 
 @media(max-width:650px){
 nav{gap:13px}
+
 .seller-item{
 grid-template-columns:85px 1fr;
 gap:12px;
 }
+
 .seller-item img{
 width:85px;
 height:110px;
@@ -240,7 +238,6 @@ Create an account or reset your password
 <h2 class="title">My Items</h2>
 
 <p class="status" id="welcome"></p>
-
 <p class="status" id="userEmail"></p>
 
 <!-- CREATE SHOP -->
@@ -266,7 +263,6 @@ CREATE MY SHOP
 
 </div>
 
-
 <!-- MY LISTINGS -->
 
 <div class="panel hidden" id="myListings">
@@ -281,11 +277,7 @@ Loading your listings...
 
 <p class="status" id="deleteStatus"></p>
 
-<div style="text-align:center;margin-top:30px">
-
-<button class="btn" onclick="loadSellerListings()">
-REFRESH MY ITEMS
-</button>
+<div class="add-item-area">
 
 <a href="upload.html" class="btn">
 + ADD A NEW ITEM
@@ -294,9 +286,14 @@ REFRESH MY ITEMS
 <a href="collection.html" class="btn">
 VIEW COLLECTION
 </a>
+
+</div>
+
 </div>
 
 </section>
+
+<!-- FOOTER -->
 
 <footer>
 <h2>NOVÉA</h2>
@@ -305,7 +302,6 @@ PRE-LOVED. REIMAGINED.
 <p>© 2026 NOVÉA</p>
 </footer>
 
-<script>
 
 // SUPABASE CONNECTION
 
@@ -324,8 +320,11 @@ let currentUser = null;
 let currentProfile = null;
 let currentShop = null;
 
+// MESSAGE FUNCTION
+
 function message(id,text){
-document.getElementById(id).textContent = text;
+const element = document.getElementById(id);
+if(element) element.textContent = text;
 }
 
 // LOGIN
@@ -367,6 +366,7 @@ message("loginStatus","Login failed: "+error.message);
 button.disabled = false;
 
 }
+
 }
 
 // LOAD ACCOUNT
@@ -389,7 +389,7 @@ const {data:profile,error:profileError} = await db
 .maybeSingle();
 
 if(profileError){
-message("shopStatus","Could not load profile: "+profileError.message);
+message("welcome","Could not load profile: "+profileError.message);
 return;
 }
 
@@ -421,6 +421,7 @@ currentShop = data;
 if(currentShop){
 
 document.getElementById("shopForm").classList.add("hidden");
+
 document.getElementById("myListings").classList.remove("hidden");
 
 await loadSellerListings();
@@ -428,6 +429,7 @@ await loadSellerListings();
 }else{
 
 document.getElementById("shopForm").classList.remove("hidden");
+
 document.getElementById("myListings").classList.add("hidden");
 
 }
@@ -441,6 +443,7 @@ async function createShop(){
 if(!currentUser)return;
 
 const shopName = document.getElementById("shopName").value.trim();
+
 const description = document.getElementById("shopDescription").value.trim();
 
 if(!shopName){
@@ -478,7 +481,7 @@ const {error:roleError} = await db
 .eq("id",currentUser.id);
 
 if(roleError){
-message("shopStatus","Shop created. Profile role update needs attention: "+roleError.message);
+message("shopStatus","Shop created, but profile role update needs attention: "+roleError.message);
 }
 
 await loadShop();
@@ -492,7 +495,9 @@ message("shopStatus","Error: "+error.message);
 button.disabled = false;
 
 }
+
 }
+
 
 // LOAD SELLER LISTINGS
 
@@ -521,8 +526,11 @@ return;
 container.innerHTML = "";
 
 if(!data || data.length === 0){
+
 container.textContent = "You haven't listed any products yet.";
+
 return;
+
 }
 
 data.forEach(product=>{
@@ -544,15 +552,17 @@ const price = document.createElement("p");
 price.textContent = "$"+Number(product.price).toFixed(2);
 
 const category = document.createElement("p");
+
 category.textContent = [
 product.brand,
 product.category
 ].filter(Boolean).join(" · ");
 
 const status = document.createElement("p");
-status.textContent = "Status: "+(product.status||"unknown");
+status.textContent = "Status: "+(product.status || "unknown");
 
 const deleteButton = document.createElement("button");
+
 deleteButton.className = "btn danger";
 deleteButton.textContent = "DELETE LISTING";
 
@@ -568,6 +578,7 @@ deleteButton
 );
 
 item.append(img,details);
+
 container.appendChild(item);
 
 });
@@ -602,6 +613,7 @@ button.disabled = false;
 button.textContent = "DELETE LISTING";
 
 message("deleteStatus","Could not delete listing: "+error.message);
+
 return;
 
 }
@@ -639,7 +651,9 @@ currentProfile = null;
 currentShop = null;
 
 document.getElementById("dashboardSection").classList.add("hidden");
+
 document.getElementById("loginSection").classList.remove("hidden");
+
 document.getElementById("logoutBtn").classList.add("hidden");
 
 message("loginStatus","You have logged out.");
@@ -651,7 +665,7 @@ message("loginStatus","You have logged out.");
 document.getElementById("logoutBtn")
 .addEventListener("click",logout);
 
-// INITIALIZE
+// INITIALIZE DASHBOARD
 
 async function initialize(){
 
@@ -679,4 +693,3 @@ initialize();
 
 </body>
 </html>
-
