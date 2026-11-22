@@ -1,374 +1,360 @@
-
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NOVÉA | Pre-loved. Reimagined.</title>
-<meta name="description" content="Discover NOVÉA, your destination for curated pre-loved fashion.">
+
+<title>NOVÉA Printables | Creative Collections</title>
+
+<meta name="description" content="Discover beautiful printable coloring pages, creative collections and digital downloads at NOVÉA Printables.">
 <meta name="robots" content="index, follow">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-*{box-sizing:border-box}
-
-body{
-margin:0;
-background:#f5f1eb;
-color:#493e34;
-font-family:Arial,sans-serif;
+* {
+  box-sizing: border-box;
 }
 
-header{
-text-align:center;
-padding:25px;
-border-bottom:1px solid #ddd4c8;
+html {
+  scroll-behavior: smooth;
 }
 
-.logo{
-font:42px Georgia;
-letter-spacing:8px;
-margin:0;
+body {
+  margin: 0;
+  background: #f8f5ef;
+  color: #493e34;
+  font-family: Arial, sans-serif;
 }
 
-.tagline{
-font-size:10px;
-letter-spacing:4px;
-margin-top:10px;
+header {
+  text-align: center;
+  padding: 28px 15px;
+  border-bottom: 1px solid #e4dbcf;
 }
 
-nav{
-display:flex;
-justify-content:center;
-gap:22px;
-flex-wrap:wrap;
-padding:18px;
+.logo {
+  font: 46px Georgia, serif;
+  letter-spacing: 9px;
+  margin: 0;
 }
 
-nav a,nav button{
-color:#493e34;
-text-decoration:none;
-font-size:12px;
-background:none;
-border:0;
-cursor:pointer;
+.tagline {
+  font-size: 10px;
+  letter-spacing: 4px;
+  margin-top: 10px;
 }
 
-button,.btn{cursor:pointer}
-button:disabled{opacity:.5;cursor:not-allowed}
-
-.btn{
-display:inline-block;
-background:#493e34;
-color:white;
-padding:13px 22px;
-border:0;
-text-decoration:none;
-font-size:12px;
-letter-spacing:1px;
-margin:5px;
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  padding: 18px;
 }
 
-.danger{background:#934b40}
-
-.hero{
-background:#eae3d8;
-text-align:center;
-padding:65px 20px;
+nav a {
+  color: #493e34;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 1px;
 }
 
-.hero h2{
-font:normal 48px Georgia;
-margin:20px 0;
+nav a:hover {
+  text-decoration: underline;
 }
 
-.hero p{
-line-height:1.8;
-max-width:480px;
-margin:20px auto;
+.hero {
+  background: #eae2d6;
+  text-align: center;
+  padding: 80px 20px;
 }
 
-.coming-soon{
-background:#f5f1eb;
-padding:30px 20px;
-margin:0 auto 35px;
-max-width:650px;
-border:1px solid #d8cabb;
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
 }
 
-.coming-soon h2{
-font:normal 32px Georgia;
-margin:18px 0;
+.hero h2 {
+  font: normal 52px Georgia, serif;
+  line-height: 1.2;
+  margin: 22px 0;
 }
 
-.coming-label{
-font-size:10px;
-letter-spacing:4px;
+.hero p {
+  max-width: 520px;
+  margin: 20px auto;
+  font-size: 14px;
+  line-height: 1.9;
 }
 
-.coming-soon p{
-font-size:13px;
-line-height:1.8;
-max-width:420px;
-margin:15px auto;
+.btn {
+  display: inline-block;
+  background: #493e34;
+  color: white;
+  padding: 15px 28px;
+  margin-top: 15px;
+  text-decoration: none;
+  border: 0;
+  font-size: 11px;
+  letter-spacing: 2px;
 }
 
-.coming-soon span{
-font-size:10px;
-letter-spacing:3px;
+.btn:hover {
+  background: #75614e;
 }
 
-section{padding:40px 6%}
-
-.title{
-text-align:center;
-font:normal 32px Georgia;
-margin-bottom:28px;
+section {
+  padding: 55px 6%;
 }
 
-.categories,.products{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:16px;
+.title {
+  text-align: center;
+  font: normal 36px Georgia, serif;
+  margin-bottom: 15px;
 }
 
-.category{
-background:#e6ddd1;
-text-align:center;
-padding:30px 5px;
-font:22px Georgia;
-cursor:pointer;
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0 auto 35px;
+  max-width: 600px;
 }
 
-.category:hover{background:#d8cabb}
-
-.product{
-background:#fffefa;
-padding-bottom:15px;
-overflow:hidden;
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  max-width: 1100px;
+  margin: auto;
 }
 
-.product img{
-width:100%;
-aspect-ratio:3/4;
-object-fit:cover;
-background:#eae3d8;
+.category {
+  background: #eae2d6;
+  padding: 40px 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #493e34;
+  font: 23px Georgia, serif;
+  transition: .2s;
 }
 
-.product h3,.product p{padding:0 12px}
-.product h3{font:19px Georgia}
-.product p{font-size:13px}
-
-.search{
-display:block;
-width:100%;
-max-width:450px;
-margin:0 auto 25px;
-padding:14px;
-border:1px solid #cfc4b7;
+.category:hover {
+  background: #493e34;
+  color: white;
 }
 
-.panel{
-max-width:600px;
-margin:25px auto;
-background:#fffefa;
-padding:25px;
-text-align:left;
+.featured {
+  background: #eee7dc;
 }
 
-.panel input,.panel textarea,.panel select{
-width:100%;
-padding:12px;
-margin:7px 0 14px;
-border:1px solid #cfc4b7;
-font:14px Arial;
-background:white;
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  max-width: 1100px;
+  margin: 30px auto;
 }
 
-.panel label{font-size:12px}
-.panel h2{font:26px Georgia}
-
-.hidden{display:none!important}
-
-.status{
-text-align:center;
-font-size:13px;
-min-height:20px;
-margin:12px;
+.product {
+  background: #fffefa;
+  padding-bottom: 18px;
 }
 
-.account{
-background:#eae3d8;
-text-align:center;
-padding:35px 15px;
+.product img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: #eee8df;
 }
 
-#imagePreview{
-display:none;
-width:100%;
-max-width:300px;
-max-height:350px;
-margin:15px auto;
-object-fit:contain;
+.product h3 {
+  font: 21px Georgia, serif;
+  padding: 0 15px;
+  margin: 17px 0 8px;
 }
 
-.photo-help{
-font-size:12px;
-color:#897d70;
-line-height:1.6;
+.product p {
+  padding: 0 15px;
+  font-size: 13px;
+  line-height: 1.7;
 }
 
-footer{
-background:#493e34;
-color:white;
-text-align:center;
-padding:35px;
+.product .price {
+  font-weight: bold;
 }
 
-footer h2{
-font-family:Georgia;
-letter-spacing:6px;
+.product a {
+  display: block;
+  margin: 15px;
+  padding: 13px;
+  background: #493e34;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 1px;
 }
 
-.seller-item{
-display:grid;
-grid-template-columns:100px 1fr;
-gap:18px;
-background:#fffefa;
-padding:15px;
-margin:15px 0;
-align-items:center;
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px;
 }
 
-.seller-item img{
-width:100px;
-height:125px;
-object-fit:cover;
-background:#eae3d8;
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  max-width: 1000px;
+  margin: 35px auto;
+  text-align: center;
 }
 
-.seller-item h3{
-font:20px Georgia;
-margin:5px 0;
+.benefit {
+  padding: 25px 15px;
+  background: #fffefa;
 }
 
-.seller-item p{
-font-size:13px;
-line-height:1.5;
+.benefit h3 {
+  font: 20px Georgia, serif;
 }
 
-.dashboard-title{
-font:26px Georgia;
-margin-top:35px;
+.benefit p {
+  font-size: 12px;
+  line-height: 1.8;
 }
 
-/* LOGIN ONLY SCREEN */
-
-body.login-view header,
-body.login-view nav,
-body.login-view #home,
-body.login-view #categories,
-body.login-view #shop,
-body.login-view #sell,
-body.login-view footer{
-display:none!important;
+.about {
+  text-align: center;
+  background: #eae2d6;
 }
 
-body.login-view #account{
-display:flex!important;
-min-height:100vh;
-width:100%;
-margin:0;
-padding:25px 15px;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-background:#eae3d8;
+.about p {
+  max-width: 650px;
+  margin: auto;
+  font-size: 14px;
+  line-height: 1.9;
 }
 
-body.login-view #account>.title{
-display:none;
+.newsletter {
+  text-align: center;
 }
 
-body.login-view #loggedOut{
-width:100%;
-max-width:500px;
+.newsletter form {
+  max-width: 430px;
+  margin: 25px auto;
+  display: flex;
+  gap: 8px;
 }
 
-body.login-view #loggedOut .panel{
-width:100%;
-margin:0;
+.newsletter input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #d8cec1;
+  background: white;
 }
 
-body.login-view #loggedIn{
-width:100%;
-max-width:500px;
+.newsletter button {
+  padding: 14px;
+  background: #493e34;
+  color: white;
+  border: 0;
+  cursor: pointer;
 }
 
-@media(max-width:650px){
-.categories,.products{
-grid-template-columns:repeat(2,1fr);
+footer {
+  background: #493e34;
+  color: white;
+  text-align: center;
+  padding: 45px 20px;
 }
 
-.hero h2{font-size:36px}
-nav{gap:13px}
-
-.seller-item{
-grid-template-columns:85px 1fr;
-gap:12px;
+footer h2 {
+  font: 34px Georgia, serif;
+  letter-spacing: 7px;
 }
 
-.seller-item img{
-width:85px;
-height:110px;
+footer p {
+  font-size: 12px;
+  line-height: 1.9;
 }
+
+footer a {
+  color: white;
+}
+
+@media(max-width:750px) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h2 {
+    font-size: 39px;
+  }
+}
+
+@media(max-width:480px) {
+  .products {
+    grid-template-columns: 1fr;
+  }
+
+  .logo {
+    font-size: 38px;
+  }
+
+  nav {
+    gap: 14px;
+  }
+
+  .newsletter form {
+    flex-direction: column;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<h1 class="logo">NOVÉA</h1>
-<div class="tagline">PRE-LOVED. REIMAGINED.</div>
+  <h1 class="logo">NOVÉA</h1>
+  <div class="tagline">PRINTABLES & CREATIVE COLLECTIONS</div>
 </header>
 
 <nav>
-<a href="index.html">HOME</a>
-<a href="collection.html">SHOP</a>
-<a href="collection.html#categories">CATEGORIES</a>
-<a href="upload.html">SELL WITH US</a>
-<a href="#account" id="loginNav">LOG IN</a>
-<button id="logoutBtn" class="hidden">LOG OUT</button>
+  <a href="index.html">HOME</a>
+  <a href="collection.html">SHOP ALL</a>
+  <a href="collection.html#categories">CATEGORIES</a>
+  <a href="#about">ABOUT US</a>
 </nav>
 
-<!-- HOMEPAGE -->
+<!-- HERO -->
 
-<div class="hero" id="home">
+<div class="hero">
 
-<div class="coming-soon">
-<p class="coming-label">A NEW WAY TO REWEAR</p>
+  <p class="eyebrow">WELCOME TO NOVÉA PRINTABLES</p>
 
-<h2>NOVÉA IS COMING SOON.</h2>
+  <h2>Creativity Begins<br>With a Single Page.</h2>
 
-<p>
-We're putting the finishing touches on something special.
-Discover a more considered wardrobe with NOVÉA.
-</p>
+  <p>
+    Discover thoughtfully designed coloring pages
+    and printable collections for little artists
+    and grown-up dreamers.
+  </p>
 
-<span>PRE-LOVED. REIMAGINED.</span>
-</div>
-
-<p>A MORE CONSIDERED WARDROBE</p>
-
-<h2>Fashion deserves<br>a second life.</h2>
-
-<p>
-Discover beautiful pre-loved fashion.
-Find your next favourite piece and give exceptional clothing a new home.
-</p>
-
-<a class="btn" href="#shop">DISCOVER THE COLLECTION</a>
+  <a class="btn" href="collection.html">
+    EXPLORE OUR COLLECTIONS
+  </a>
 
 </div>
 
@@ -376,370 +362,147 @@ Find your next favourite piece and give exceptional clothing a new home.
 
 <section id="categories">
 
-<h2 class="title">Shop by category</h2>
+  <h2 class="title">Explore Our Collections</h2>
 
-<div class="categories">
+  <p class="subtitle">
+    Find something creative for every mood,
+    moment and imagination.
+  </p>
 
-<div class="category" onclick="filterCategory('Women')">
-Women
-</div>
+  <div class="categories">
 
-<div class="category" onclick="filterCategory('Men')">
-Men
-</div>
+    <a class="category"
+       href="collection.html?category=Kids">
+       Kids Coloring
+    </a>
 
-<div class="category" onclick="filterCategory('Bags')">
-Handbags
-</div>
+    <a class="category"
+       href="collection.html?category=Adults">
+       Adult Coloring
+    </a>
 
-<div class="category" onclick="filterCategory('Shoes')">
-Shoes
-</div>
+    <a class="category"
+       href="collection.html?category=Cozy">
+       Cozy & Aesthetic
+    </a>
 
-</div>
-</section>
+    <a class="category"
+       href="collection.html?category=Seasonal">
+       Seasonal
+    </a>
 
-<!-- COLLECTION -->
-
-<section id="shop">
-
-<h2 class="title">Our Collection</h2>
-
-<p style="text-align:center;line-height:1.8">
-Discover beautiful pre-loved fashion and give exceptional pieces a new home.
-</p>
-
-<input
-class="search"
-id="search"
-placeholder="Search products..."
-oninput="renderProducts()"
->
-
-<div class="products" id="products">
-<p>Loading collection...</p>
-</div>
-
-<p class="status" id="shopStatus"></p>
+  </div>
 
 </section>
 
-<!-- CUSTOMER ACCOUNT -->
+<!-- FEATURED PRODUCTS -->
 
-<section id="account" class="account">
+<section class="featured">
 
-<h2 class="title">Your NOVÉA account</h2>
+  <h2 class="title">Discover Our Printables</h2>
 
-<!-- LOGGED OUT -->
+  <p class="subtitle">
+    Beautiful collections, ready to download
+    and enjoy at home.
+  </p>
 
-<div id="loggedOut">
+  <div class="products" id="featuredProducts">
 
-<div class="panel">
+    <p class="empty">Loading our collections...</p>
 
-<h2>Welcome back</h2>
+  </div>
 
-<p>Log in or create your account.</p>
-
-<label>Email</label>
-
-<input
-id="email"
-type="email"
-placeholder="Your email"
->
-
-<label>Password</label>
-
-<input
-id="password"
-type="password"
-placeholder="Password"
->
-
-<button
-class="btn"
-id="loginBtn"
-onclick="login()"
->
-LOG IN
-</button>
-
-<button
-class="btn"
-onclick="signup()"
->
-CREATE ACCOUNT
-</button>
-
-<p>
-<a
-href="#"
-onclick="resetPassword();return false"
-style="color:#493e34"
->
-Forgot your password?
-</a>
-</p>
-
-<p class="status" id="authStatus"></p>
-
-<p class="status" id="resetStatus"></p>
-
-</div>
-</div>
-
-<!-- LOGGED IN -->
-
-<div id="loggedIn" class="hidden">
-
-<h2 id="welcome"></h2>
-
-<p id="userEmail"></p>
-
-<p id="userRole"></p>
-
-<button
-class="btn"
-onclick="showSeller()"
->
-SELLER DASHBOARD
-</button>
-
-</div>
+  <div style="text-align:center">
+    <a class="btn" href="collection.html">
+      SHOP ALL PRINTABLES
+    </a>
+  </div>
 
 </section>
 
-<!-- SELLER DASHBOARD -->
+<!-- BENEFITS -->
 
-<section id="sell" class="hidden">
+<section>
 
-<h2 class="title">Your seller dashboard</h2>
+  <h2 class="title">The NOVÉA Experience</h2>
 
-<!-- CREATE SHOP -->
+  <div class="benefits">
 
-<div class="panel" id="shopForm">
+    <div class="benefit">
+      <h3>Instant Downloads</h3>
+      <p>
+        Get your digital coloring collections
+        without waiting for shipping.
+      </p>
+    </div>
 
-<h2>Create your shop</h2>
+    <div class="benefit">
+      <h3>Print at Home</h3>
+      <p>
+        Convenient printable PDF files
+        ready for your favorite printer.
+      </p>
+    </div>
 
-<label>Shop name</label>
+    <div class="benefit">
+      <h3>Creativity for Everyone</h3>
+      <p>
+        Explore designs for children,
+        adults and every creative moment.
+      </p>
+    </div>
 
-<input
-id="shopName"
-placeholder="Your shop name"
->
+  </div>
 
-<label>Shop description</label>
+</section>
 
-<textarea
-id="shopDescription"
-placeholder="Tell buyers about your shop"
-></textarea>
+<!-- ABOUT -->
 
-<button
-class="btn"
-onclick="createShop()"
->
-CREATE SHOP
-</button>
+<section class="about" id="about">
 
-<p class="status" id="shopCreateStatus"></p>
+  <h2 class="title">A Little About NOVÉA</h2>
 
-</div>
+  <p>
+    We believe creativity should be simple,
+    accessible and enjoyable.
 
-<!-- PRODUCT LISTING FORM -->
+    NOVÉA brings together thoughtfully designed
+    printable coloring pages and creative
+    collections made to inspire imagination,
+    relaxation and everyday moments of joy.
+  </p>
 
-<div class="panel hidden" id="listingForm">
+</section>
 
-<h2>List a new item</h2>
+<!-- NEWSLETTER -->
 
-<label>Product title</label>
+<section class="newsletter">
 
-<input
-id="productTitle"
-placeholder="Product name"
->
+  <h2 class="title">Stay Inspired</h2>
 
-<label>Description</label>
+  <p class="subtitle">
+    Be the first to discover new coloring
+    collections and creative releases.
+  </p>
 
-<textarea
-id="productDescription"
-placeholder="Describe your item"
-></textarea>
+  <form id="newsletterForm">
 
-<label>Category</label>
+    <input
+      type="email"
+      id="newsletterEmail"
+      placeholder="Your email address"
+      required
+    >
 
-<select id="productCategory">
-<option>Women</option>
-<option>Men</option>
-<option>Bags</option>
-<option>Shoes</option>
-<option>Accessories</option>
-</select>
+    <button type="submit">
+      JOIN US
+    </button>
 
-<label>Brand</label>
+  </form>
 
-<select id="productBrand">
-<option value="">Select a brand</option>
-<option>Nike</option>
-<option>Adidas</option>
-<option>Zara</option>
-<option>H&amp;M</option>
-<option>ASOS</option>
-<option>Ralph Lauren</option>
-<option>Calvin Klein</option>
-<option>Tommy Hilfiger</option>
-<option>Levi's</option>
-<option>Gucci</option>
-<option>Prada</option>
-<option>Louis Vuitton</option>
-<option>Chanel</option>
-<option>Other</option>
-</select>
-
-<label>Size</label>
-
-<select id="productSize">
-
-<option value="">Select size</option>
-
-<optgroup label="Letter sizes">
-<option>XXS</option>
-<option>XS</option>
-<option>S</option>
-<option>M</option>
-<option>L</option>
-<option>XL</option>
-<option>XXL</option>
-<option>XXXL</option>
-</optgroup>
-
-<optgroup label="Women's US sizes">
-<option>00</option>
-<option>0</option>
-<option>2</option>
-<option>4</option>
-<option>6</option>
-<option>8</option>
-<option>10</option>
-<option>12</option>
-<option>14</option>
-<option>16</option>
-<option>18</option>
-<option>20</option>
-<option>22</option>
-<option>24</option>
-</optgroup>
-
-<optgroup label="Men's waist sizes">
-<option>28</option>
-<option>29</option>
-<option>30</option>
-<option>31</option>
-<option>32</option>
-<option>33</option>
-<option>34</option>
-<option>36</option>
-<option>38</option>
-<option>40</option>
-<option>42</option>
-<option>44</option>
-<option>46</option>
-</optgroup>
-
-<optgroup label="US shoe sizes">
-<option>US Shoe 5</option>
-<option>US Shoe 6</option>
-<option>US Shoe 7</option>
-<option>US Shoe 8</option>
-<option>US Shoe 9</option>
-<option>US Shoe 10</option>
-<option>US Shoe 11</option>
-<option>US Shoe 12</option>
-<option>US Shoe 13</option>
-<option>US Shoe 14</option>
-</optgroup>
-
-<option>One Size</option>
-
-</select>
-
-<label>Condition</label>
-
-<select id="productCondition">
-<option>New with tags</option>
-<option>New without tags</option>
-<option>Very good</option>
-<option>Good</option>
-<option>Fair</option>
-</select>
-
-<label>Price (USD)</label>
-
-<input
-id="productPrice"
-type="number"
-min="0.01"
-step="0.01"
-placeholder="85.00"
->
-
-<label>Take a photo or upload an existing photo</label>
-
-<input
-id="productImage"
-type="file"
-accept="image/*"
-capture="environment"
-onchange="previewProductImage(event)"
->
-
-<p class="photo-help">
-On a phone, choose Camera to take a new picture or Photo Library to select one.
-On a laptop, upload an existing picture.
-Maximum image size: 5 MB.
-</p>
-
-<img
-id="imagePreview"
-alt="Product photo preview"
->
-
-<button
-class="btn"
-id="publishBtn"
-onclick="addProduct()"
->
-PUBLISH PRODUCT
-</button>
-
-<p class="status" id="listingStatus"></p>
-
-</div>
-
-<!-- MY LISTINGS -->
-
-<div class="panel" id="myListings">
-
-<h2 class="dashboard-title">My Listings</h2>
-
-<p>
-Manage the products you have listed on NOVÉA.
-</p>
-
-<div id="sellerProducts">
-<p>Your listings will appear here.</p>
-</div>
-
-<p class="status" id="deleteStatus"></p>
-
-<button
-class="btn"
-onclick="loadSellerListings()"
->
-REFRESH MY LISTINGS
-</button>
-
-</div>
+  <p id="newsletterStatus"
+     style="font-size:12px">
+  </p>
 
 </section>
 
@@ -747,17 +510,21 @@ REFRESH MY LISTINGS
 
 <footer>
 
-<h2>NOVÉA</h2>
+  <h2>NOVÉA</h2>
 
-PRE-LOVED. REIMAGINED.
+  PRINTABLES & CREATIVE COLLECTIONS
 
-<p>Discover. Rewear. Repeat.</p>
+  <p>A little creativity, delivered instantly.</p>
 
-<p>© 2026 NOVÉA</p>
+  <p>
+    <a href="index.html">Home</a> |
+    <a href="collection.html">Shop</a> |
+    <a href="#about">About</a>
+  </p>
+
+  <p>© 2026 NOVÉA. All rights reserved.</p>
 
 </footer>
-
-<!-- JAVASCRIPT STARTS HERE -->
 
 <script>
 
@@ -770,1049 +537,42 @@ const SUPABASE_KEY =
 "sb_publishable_scjOBsZKxD2pfmI2fgGG9w_n8vIXU0q";
 
 const db = window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
-// WEBSITE VARIABLES
+// LOAD FEATURED PRODUCTS
 
-let currentUser = null;
-let currentProfile = null;
-let currentShop = null;
-let allProducts = [];
-let selectedCategory = "All";
-let loginInProgress = false;
+async function loadFeaturedProducts() {
 
-// MESSAGE HELPER
+  const container =
+    document.getElementById("featuredProducts");
 
-function message(id,text){
-const element = document.getElementById(id);
+  try {
 
-if(element){
-element.textContent = text;
-}
-}
+    const {data,error} = await db
+      .from("products")
+      .select("*")
+      .eq("status","active")
+      .order("created_at",{ascending:false})
+      .limit(6);
 
-// LOGIN-ONLY SCREEN
+    if(error) throw error;
 
-document.getElementById("loginNav")
-.addEventListener("click",function(){
+    container.innerHTML = "";
 
-document.body.classList.add("login-view");
+    if(!data || data.length === 0) {
 
-});
+      container.innerHTML = `
+        <div class="empty">
+          Our first creative collections
+          are coming soon.
+        </div>
+      `;
 
-// IMAGE PREVIEW
+      return;
+    }
 
-function previewProductImage(event){
+    data.forEach(product => {
 
-const file = event.target.files[0];
-
-const preview =
-document.getElementById("imagePreview");
-
-if(!file){
-preview.style.display = "none";
-return;
-}
-
-if(
-!file.type.startsWith("image/") ||
-file.size > 5*1024*1024
-){
-
-message(
-"listingStatus",
-"Please select an image smaller than 5 MB."
-);
-
-event.target.value = "";
-
-preview.style.display = "none";
-
-return;
-}
-
-preview.src = URL.createObjectURL(file);
-
-preview.style.display = "block";
-
-message(
-"listingStatus",
-"Photo ready to publish."
-);
-
-}
-
-// CREATE ACCOUNT
-
-async function signup(){
-
-const email =
-document.getElementById("email").value.trim();
-
-const password =
-document.getElementById("password").value;
-
-if(!email || password.length < 6){
-
-message(
-"authStatus",
-"Enter an email and a password of at least 6 characters."
-);
-
-return;
-}
-
-message("authStatus","Creating account...");
-
-const {data,error} =
-await db.auth.signUp({
-email,
-password
-});
-
-if(error){
-
-message("authStatus",error.message);
-
-return;
-}
-
-if(data.session){
-
-await loadAccount(data.session.user);
-
-message("authStatus","Account created!");
-
-}else{
-
-message(
-"authStatus",
-"Check your email to confirm your account."
-);
-
-}
-
-}
-
-// LOGIN
-
-async function login(){
-
-if(loginInProgress)return;
-
-const email =
-document.getElementById("email").value.trim();
-
-const password =
-document.getElementById("password").value;
-
-if(!email || !password){
-
-message(
-"authStatus",
-"Enter your email and password."
-);
-
-return;
-}
-
-loginInProgress = true;
-
-document.getElementById("loginBtn").disabled = true;
-
-message("authStatus","Logging in...");
-
-try{
-
-const {data,error} =
-await db.auth.signInWithPassword({
-email,
-password
-});
-
-if(error){
-
-message("authStatus",error.message);
-
-return;
-}
-
-await loadAccount(data.user);
-
-message("authStatus","Login successful!");
-
-}catch(error){
-
-message(
-"authStatus",
-"Login failed: "+error.message
-);
-
-}finally{
-
-loginInProgress = false;
-
-document.getElementById("loginBtn").disabled = false;
-
-}
-
-}
-
-// FORGOT PASSWORD
-
-async function resetPassword(){
-
-const email =
-document.getElementById("email").value.trim();
-
-if(!email){
-
-message(
-"resetStatus",
-"Enter your email address first."
-);
-
-return;
-}
-
-const {error} =
-await db.auth.resetPasswordForEmail(email);
-
-if(error){
-
-message("resetStatus",error.message);
-
-return;
-}
-
-message(
-"resetStatus",
-"Password reset instructions have been sent if your email is registered."
-);
-
-}
-
-// LOAD ACCOUNT
-
-async function loadAccount(user){
-
-currentUser = user;
-
-const {data,error} =
-await db.from("profiles")
-.select("*")
-.eq("id",user.id)
-.maybeSingle();
-
-if(error){
-
-message(
-"authStatus",
-"Could not load profile: "+error.message
-);
-
-return;
-}
-
-currentProfile = data;
-
-if(!currentProfile){
-
-const {data:newProfile,error:profileError} =
-await db.from("profiles")
-.insert({
-
-id:user.id,
-
-full_name:"",
-
-username:user.email.split("@")[0],
-
-role:"buyer"
-
-})
-.select()
-.single();
-
-if(profileError){
-
-message(
-"authStatus",
-"Profile setup error: "+profileError.message
-);
-
-return;
-}
-
-currentProfile = newProfile;
-
-}
-
-// RESTORE NORMAL WEBSITE AFTER LOGIN
-
-document.body.classList.remove("login-view");
-
-document.getElementById("loggedOut")
-.classList.add("hidden");
-
-document.getElementById("loggedIn")
-.classList.remove("hidden");
-
-document.getElementById("loginNav")
-.classList.add("hidden");
-
-document.getElementById("logoutBtn")
-.classList.remove("hidden");
-
-document.getElementById("welcome").textContent =
-"Welcome, "+
-(
-currentProfile.full_name ||
-currentProfile.username ||
-"NOVÉA member"
-);
-
-document.getElementById("userEmail").textContent =
-user.email;
-
-document.getElementById("userRole").textContent =
-"Account type: "+currentProfile.role;
-
-await loadShop();
-
-}
-
-// LOAD SHOP
-
-async function loadShop(){
-
-if(!currentUser)return;
-
-const {data,error} =
-await db.from("shops")
-.select("*")
-.eq("seller_id",currentUser.id)
-.maybeSingle();
-
-if(error){
-
-message("shopCreateStatus",error.message);
-
-return;
-}
-
-currentShop = data;
-
-if(currentShop){
-
-document.getElementById("shopForm")
-.classList.add("hidden");
-
-document.getElementById("listingForm")
-.classList.remove("hidden");
-
-await loadSellerListings();
-
-}else{
-
-document.getElementById("shopForm")
-.classList.remove("hidden");
-
-document.getElementById("listingForm")
-.classList.add("hidden");
-
-document.getElementById("sellerProducts")
-.textContent =
-"Create your shop to start listing products.";
-
-}
-
-}
-
-// CREATE SHOP
-
-async function createShop(){
-
-if(!currentUser)return;
-
-const shopName =
-document.getElementById("shopName").value.trim();
-
-const description =
-document.getElementById("shopDescription").value.trim();
-
-if(!shopName){
-
-message(
-"shopCreateStatus",
-"Please enter a shop name."
-);
-
-return;
-}
-
-message(
-"shopCreateStatus",
-"Creating your shop..."
-);
-
-const {error} =
-await db.from("shops").insert({
-
-seller_id:currentUser.id,
-
-shop_name:shopName,
-
-description
-
-});
-
-if(error){
-
-message("shopCreateStatus",error.message);
-
-return;
-}
-
-const {error:roleError} =
-await db.from("profiles")
-.update({role:"seller"})
-.eq("id",currentUser.id);
-
-if(roleError){
-
-message(
-"shopCreateStatus",
-"Shop created, but role update failed: "+
-roleError.message
-);
-
-}
-
-await loadAccount(currentUser);
-
-message(
-"shopCreateStatus",
-"Your shop is ready!"
-);
-
-}
-
-// ADD PRODUCT
-
-async function addProduct(){
-
-if(!currentUser || !currentShop){
-
-message(
-"listingStatus",
-"Please log in and create a shop first."
-);
-
-return;
-}
-
-const title =
-document.getElementById("productTitle").value.trim();
-
-const description =
-document.getElementById("productDescription").value.trim();
-
-const category =
-document.getElementById("productCategory").value;
-
-const brand =
-document.getElementById("productBrand").value;
-
-const size =
-document.getElementById("productSize").value;
-
-const condition =
-document.getElementById("productCondition").value;
-
-const price =
-Number(document.getElementById("productPrice").value);
-
-const file =
-document.getElementById("productImage").files[0];
-
-if(!title || !price || price <= 0 || !file){
-
-message(
-"listingStatus",
-"Enter a title, valid price and product photo."
-);
-
-return;
-}
-
-if(
-!file.type.startsWith("image/") ||
-file.size > 5*1024*1024
-){
-
-message(
-"listingStatus",
-"Please select a valid image smaller than 5 MB."
-);
-
-return;
-}
-
-const publishBtn =
-document.getElementById("publishBtn");
-
-publishBtn.disabled = true;
-
-try{
-
-message("listingStatus","Uploading photo...");
-
-const extension =
-file.name.split(".").pop().toLowerCase();
-
-const safeExtension =
-/^[a-z0-9]+$/.test(extension)
-? extension
-: "jpg";
-
-const imagePath =
-currentUser.id+"/"+
-crypto.randomUUID()+"."+
-safeExtension;
-
-const {error:uploadError} =
-await db.storage.from("product-images")
-.upload(imagePath,file,{
-cacheControl:"3600",
-upsert:false,
-contentType:file.type
-});
-
-if(uploadError){
-
-message(
-"listingStatus",
-"Upload failed: "+uploadError.message
-);
-
-return;
-}
-
-const {data:imageData} =
-db.storage.from("product-images")
-.getPublicUrl(imagePath);
-
-message(
-"listingStatus",
-"Saving your listing..."
-);
-
-const {error} =
-await db.from("products").insert({
-
-seller_id:currentUser.id,
-
-shop_id:currentShop.id,
-
-title,
-
-description,
-
-category,
-
-brand,
-
-size,
-
-condition,
-
-price,
-
-image_url:imageData.publicUrl,
-
-status:"active"
-
-});
-
-if(error){
-
-message(
-"listingStatus",
-"Listing failed: "+error.message
-);
-
-return;
-}
-
-message(
-"listingStatus",
-"Your product is now listed!"
-);
-
-// CLEAR FORM
-
-document.getElementById("productTitle").value="";
-
-document.getElementById("productDescription").value="";
-
-document.getElementById("productBrand").value="";
-
-document.getElementById("productSize").value="";
-
-document.getElementById("productPrice").value="";
-
-document.getElementById("productImage").value="";
-
-document.getElementById("imagePreview").style.display="none";
-
-await loadProducts();
-
-await loadSellerListings();
-
-}catch(error){
-
-message(
-"listingStatus",
-"Error: "+error.message
-);
-
-}finally{
-
-publishBtn.disabled = false;
-
-}
-
-}
-
-// LOAD SELLER LISTINGS
-
-async function loadSellerListings(){
-
-const container =
-document.getElementById("sellerProducts");
-
-if(!currentUser){
-
-container.textContent =
-"Please log in first.";
-
-return;
-}
-
-container.textContent =
-"Loading your listings...";
-
-const {data,error} =
-await db.from("products")
-.select("*")
-.eq("seller_id",currentUser.id)
-.order("created_at",{ascending:false});
-
-if(error){
-
-container.textContent =
-"Could not load listings: "+error.message;
-
-return;
-}
-
-container.innerHTML = "";
-
-if(!data || data.length === 0){
-
-container.textContent =
-"You haven't listed any products yet.";
-
-return;
-}
-
-data.forEach(product=>{
-
-const item = document.createElement("div");
-
-item.className = "seller-item";
-
-const img = document.createElement("img");
-
-img.src = product.image_url || "";
-
-img.alt = product.title || "Product";
-
-img.loading = "lazy";
-
-const details = document.createElement("div");
-
-const heading = document.createElement("h3");
-
-heading.textContent =
-product.title || "Untitled product";
-
-const price = document.createElement("p");
-
-price.textContent =
-"$"+Number(product.price).toFixed(2);
-
-const category = document.createElement("p");
-
-category.textContent =
-(product.brand || "")+
-(product.brand ? " · " : "")+
-(product.category || "");
-
-const status = document.createElement("p");
-
-status.textContent =
-"Status: "+(product.status || "unknown");
-
-const deleteButton =
-document.createElement("button");
-
-deleteButton.className = "btn danger";
-
-deleteButton.textContent = "DELETE LISTING";
-
-deleteButton.onclick = () =>
-deleteProduct(product.id,deleteButton);
-
-details.append(
-heading,
-price,
-category,
-status,
-deleteButton
-);
-
-item.append(img,details);
-
-container.appendChild(item);
-
-});
-
-}
-
-// DELETE LISTING
-
-async function deleteProduct(productId,button){
-
-if(!currentUser){
-
-message(
-"deleteStatus",
-"Please log in first."
-);
-
-return;
-}
-
-const confirmed = confirm(
-"Are you sure you want to delete this listing?\n\nThis action cannot be undone."
-);
-
-if(!confirmed)return;
-
-button.disabled = true;
-
-button.textContent = "DELETING...";
-
-message(
-"deleteStatus",
-"Deleting listing..."
-);
-
-const {data,error} =
-await db.from("products")
-.delete()
-.eq("id",productId)
-.eq("seller_id",currentUser.id)
-.select("id");
-
-if(error){
-
-button.disabled = false;
-
-button.textContent = "DELETE LISTING";
-
-message(
-"deleteStatus",
-"Could not delete listing: "+error.message
-);
-
-return;
-}
-
-if(!data || data.length === 0){
-
-button.disabled = false;
-
-button.textContent = "DELETE LISTING";
-
-message(
-"deleteStatus",
-"Listing not deleted. You may not own this product."
-);
-
-return;
-}
-
-message(
-"deleteStatus",
-"Your listing has been successfully deleted!"
-);
-
-await loadSellerListings();
-
-await loadProducts();
-
-}
-
-// LOAD PUBLIC PRODUCTS
-
-async function loadProducts(){
-
-const container =
-document.getElementById("products");
-
-container.textContent =
-"Loading products...";
-
-const {data,error} =
-await db.from("products")
-.select("*")
-.eq("status","active")
-.order("created_at",{ascending:false});
-
-if(error){
-
-container.textContent =
-"Could not load products: "+error.message;
-
-return;
-}
-
-allProducts = data || [];
-
-renderProducts();
-
-}
-
-// DISPLAY PRODUCTS
-
-function renderProducts(){
-
-const container =
-document.getElementById("products");
-
-const query =
-document.getElementById("search").value.toLowerCase();
-
-const filtered = allProducts.filter(p=>{
-
-const categoryMatch =
-selectedCategory === "All" ||
-p.category === selectedCategory;
-
-const searchMatch =
-[p.title,p.description,p.brand,p.category]
-.filter(Boolean)
-.join(" ")
-.toLowerCase()
-.includes(query);
-
-return categoryMatch && searchMatch;
-
-});
-
-container.innerHTML = "";
-
-if(!filtered.length){
-
-container.textContent =
-"No products found. Check back soon!";
-
-return;
-}
-
-filtered.forEach(p=>{
-
-const card = document.createElement("article");
-
-card.className = "product";
-
-const img = document.createElement("img");
-
-img.src = p.image_url || "";
-
-img.alt = p.title || "Product";
-
-img.loading = "lazy";
-
-const heading = document.createElement("h3");
-
-heading.textContent =
-p.title || "Untitled product";
-
-const price = document.createElement("p");
-
-price.textContent =
-"$"+Number(p.price).toFixed(2);
-
-const details = document.createElement("p");
-
-details.textContent =
-[p.brand,p.size,p.condition]
-.filter(Boolean)
-.join(" · ");
-
-const category = document.createElement("p");
-
-category.textContent = p.category || "";
-
-card.append(
-img,
-heading,
-price,
-details,
-category
-);
-
-container.appendChild(card);
-
-});
-
-}
-
-// CATEGORY FILTER
-
-function filterCategory(category){
-
-selectedCategory = category;
-
-document.getElementById("search").value = "";
-
-renderProducts();
-
-document.getElementById("shop").scrollIntoView({
-behavior:"smooth"
-});
-
-}
-
-// SELLER DASHBOARD
-
-function showSeller(){
-
-if(!currentUser){
-
-document.getElementById("account").scrollIntoView({
-behavior:"smooth"
-});
-
-return;
-}
-
-document.getElementById("sell")
-.classList.remove("hidden");
-
-document.getElementById("sell").scrollIntoView({
-behavior:"smooth"
-});
-
-loadShop();
-
-}
-
-// LOG OUT
-
-async function logout(){
-
-const {error} = await db.auth.signOut();
-
-if(error){
-
-alert(error.message);
-
-return;
-}
-
-currentUser = null;
-
-currentProfile = null;
-
-currentShop = null;
-
-document.body.classList.remove("login-view");
-
-document.getElementById("loggedIn")
-.classList.add("hidden");
-
-document.getElementById("loggedOut")
-.classList.remove("hidden");
-
-document.getElementById("loginNav")
-.classList.remove("hidden");
-
-document.getElementById("logoutBtn")
-.classList.add("hidden");
-
-document.getElementById("sell")
-.classList.add("hidden");
-
-message(
-"authStatus",
-"You have logged out."
-);
-
-}
-
-document.getElementById("logoutBtn")
-.addEventListener("click",logout);
-
-// AUTHENTICATION LISTENER
-
-db.auth.onAuthStateChange((event,session)=>{
-
-if(event === "SIGNED_IN" && session){
-
-setTimeout(()=>{
-loadAccount(session.user);
-},0);
-
-}
-
-if(event === "SIGNED_OUT"){
-
-currentUser = null;
-
-currentProfile = null;
-
-currentShop = null;
-
-}
-
-});
-
-// INITIALIZE WEBSITE
-
-async function initialize(){
-
-const {data} = await db.auth.getSession();
-
-if(data.session){
-
-await loadAccount(data.session.user);
-
-}
-
-await loadProducts();
-
-}
-
-initialize();
-
-</script>
-
-</body>
-</html>
+      const card = document.createElement("article
