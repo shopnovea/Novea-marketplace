@@ -1,208 +1,274 @@
-
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NOVÉA | Our Collection</title>
-<meta name="description" content="Shop curated pre-loved fashion at NOVÉA.">
+
+<title>NOVÉA Printables | Coloring Collections</title>
+
+<meta name="description" content="Discover beautiful printable coloring pages for children and adults at NOVÉA Printables.">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-margin:0;
-background:#f5f1eb;
-color:#493e34;
-font-family:Arial,sans-serif;
+* {
+  box-sizing: border-box;
 }
 
-header{
-text-align:center;
-padding:25px;
-border-bottom:1px solid #ddd4c8;
+body {
+  margin: 0;
+  background: #f8f5ef;
+  color: #493e34;
+  font-family: Arial, sans-serif;
 }
 
-.logo{
-font:42px Georgia;
-letter-spacing:8px;
-margin:0;
+header {
+  text-align: center;
+  padding: 28px 15px;
+  border-bottom: 1px solid #e4dbcf;
 }
 
-.tagline{
-font-size:10px;
-letter-spacing:4px;
-margin-top:10px;
+.logo {
+  font: 46px Georgia, serif;
+  letter-spacing: 9px;
+  margin: 0;
 }
 
-nav{
-display:flex;
-justify-content:center;
-gap:22px;
-flex-wrap:wrap;
-padding:18px;
+.tagline {
+  font-size: 10px;
+  letter-spacing: 4px;
+  margin-top: 10px;
 }
 
-nav a{
-color:#493e34;
-text-decoration:none;
-font-size:12px;
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  padding: 18px;
 }
 
-nav a:hover{
-text-decoration:underline;
+nav a {
+  color: #493e34;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 1px;
 }
 
-.hero{
-background:#eae3d8;
-text-align:center;
-padding:45px 20px;
+nav a:hover {
+  text-decoration: underline;
 }
 
-.hero h2{
-font:normal 42px Georgia;
-margin:15px 0;
+.hero {
+  background: #eae2d6;
+  text-align: center;
+  padding: 65px 20px;
 }
 
-.hero p{
-font-size:13px;
-line-height:1.8;
+.hero .eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
 }
 
-section{
-padding:40px 6%;
+.hero h2 {
+  font: normal 46px Georgia, serif;
+  margin: 20px 0;
 }
 
-.title{
-text-align:center;
-font:normal 32px Georgia;
-margin-bottom:28px;
+.hero p {
+  font-size: 14px;
+  line-height: 1.8;
 }
 
-.categories{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:16px;
-max-width:1000px;
-margin:auto;
+.hero a {
+  display: inline-block;
+  margin-top: 20px;
+  background: #493e34;
+  color: white;
+  padding: 15px 30px;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 2px;
 }
 
-.category{
-background:#e6ddd1;
-text-align:center;
-padding:25px 5px;
-font:22px Georgia;
-cursor:pointer;
-border:0;
-color:#493e34;
+section {
+  padding: 50px 6%;
+}
+
+.title {
+  text-align: center;
+  font: normal 34px Georgia, serif;
+  margin-bottom: 35px;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  max-width: 1050px;
+  margin: auto;
+}
+
+.category {
+  padding: 25px 10px;
+  background: #eae2d6;
+  border: 1px solid #e0d5c7;
+  color: #493e34;
+  font: 19px Georgia, serif;
+  cursor: pointer;
+  transition: .2s;
 }
 
 .category:hover,
-.category.active{
-background:#493e34;
-color:white;
+.category.active {
+  background: #493e34;
+  color: white;
 }
 
-.search{
-display:block;
-width:100%;
-max-width:500px;
-margin:0 auto 25px;
-padding:14px;
-border:1px solid #cfc4b7;
-background:#fffefa;
-font-size:14px;
+.search {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 25px;
+  padding: 15px;
+  border: 1px solid #d8cec1;
+  background: #fffefa;
+  font-size: 14px;
 }
 
-.products{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:16px;
+.status {
+  text-align: center;
+  font-size: 13px;
+  margin: 20px;
+  min-height: 20px;
 }
 
-.product{
-background:#fffefa;
-padding-bottom:15px;
-overflow:hidden;
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  max-width: 1150px;
+  margin: auto;
 }
 
-.product img{
-width:100%;
-aspect-ratio:3/4;
-object-fit:cover;
-background:#eae3d8;
-display:block;
+.product {
+  background: #fffefa;
+  padding-bottom: 20px;
+  overflow: hidden;
+  border: 1px solid #eee7dd;
 }
 
-.product h3,
-.product p{
-padding:0 12px;
+.product img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  background: #eee8df;
 }
 
-.product h3{
-font:19px Georgia;
-margin-bottom:8px;
+.product h3 {
+  font: 21px Georgia, serif;
+  margin: 18px 15px 8px;
 }
 
-.product p{
-font-size:13px;
-line-height:1.5;
+.product p {
+  padding: 0 15px;
+  font-size: 13px;
+  line-height: 1.6;
 }
 
-.price{
-font-weight:bold;
+.price {
+  font-weight: bold;
+  font-size: 16px !important;
 }
 
-.status{
-text-align:center;
-font-size:13px;
-min-height:20px;
-margin:20px;
+.product-category {
+  color: #897766;
+  font-size: 10px !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-.empty{
-text-align:center;
-padding:40px 15px;
-background:#fffefa;
-line-height:1.8;
+.buy-button {
+  display: block;
+  margin: 15px;
+  padding: 13px;
+  background: #493e34;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 1px;
 }
 
-.reset{
-display:block;
-margin:15px auto;
-padding:10px 20px;
-background:#493e34;
-color:white;
-border:0;
-cursor:pointer;
+.buy-button:hover {
+  background: #75614e;
 }
 
-footer{
-background:#493e34;
-color:white;
-text-align:center;
-padding:35px;
+.empty {
+  text-align: center;
+  padding: 45px 15px;
+  background: #fffefa;
+  line-height: 1.8;
+  grid-column: 1 / -1;
 }
 
-footer h2{
-font-family:Georgia;
-letter-spacing:6px;
+.about {
+  background: #eee7dc;
+  text-align: center;
 }
 
-@media(max-width:650px){
-.categories,.products{
-grid-template-columns:repeat(2,1fr);
+.about p {
+  max-width: 650px;
+  margin: auto;
+  font-size: 14px;
+  line-height: 1.9;
 }
 
-.hero h2{
-font-size:34px;
+footer {
+  background: #493e34;
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
 }
 
-nav{
-gap:13px;
+footer h2 {
+  font: 32px Georgia, serif;
+  letter-spacing: 7px;
 }
+
+footer p {
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+footer a {
+  color: white;
+}
+
+@media(max-width:750px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero h2 {
+    font-size: 35px;
+  }
+}
+
+@media(max-width:450px) {
+  .products {
+    grid-template-columns: 1fr;
+  }
+
+  .logo {
+    font-size: 37px;
+  }
 }
 </style>
 </head>
@@ -210,76 +276,117 @@ gap:13px;
 <body>
 
 <header>
-<h1 class="logo">NOVÉA</h1>
-<div class="tagline">PRE-LOVED. REIMAGINED.</div>
+  <h1 class="logo">NOVÉA</h1>
+  <div class="tagline">PRINTABLES & CREATIVE COLLECTIONS</div>
 </header>
 
 <nav>
-<a href="index.html">HOME</a>
-<a href="collection.html">SHOP</a>
-<a href="#categories">CATEGORIES</a>
-<a href="upload.html">SELL WITH US</a>
-<a href="index.html#account">MY ACCOUNT</a>
+  <a href="index.html">HOME</a>
+  <a href="collection.html">SHOP ALL</a>
+  <a href="#categories">CATEGORIES</a>
+  <a href="#about">ABOUT</a>
 </nav>
 
 <div class="hero">
-<p>A MORE CONSIDERED WARDROBE</p>
-<h2>Discover the Collection</h2>
-<p>Beautiful pre-loved fashion. Exceptional pieces deserve a second life.</p>
+  <p class="eyebrow">WELCOME TO NOVÉA PRINTABLES</p>
+
+  <h2>A Little Creativity,<br>Delivered Instantly.</h2>
+
+  <p>
+    Beautiful printable coloring pages for little artists
+    and grown-up dreamers.
+  </p>
+
+  <a href="#shop">EXPLORE COLLECTIONS</a>
 </div>
 
 <section id="categories">
 
-<h2 class="title">Shop by category</h2>
+  <h2 class="title">Explore Our Collections</h2>
 
-<div class="categories">
+  <div class="categories">
 
-<button class="category active" onclick="filterCategory('All',this)">
-All
-</button>
+    <button class="category active"
+      onclick="filterCategory('All',this)">
+      All Collections
+    </button>
 
-<button class="category" onclick="filterCategory('Women',this)">
-Women
-</button>
+    <button class="category"
+      onclick="filterCategory('Kids',this)">
+      Kids Coloring
+    </button>
 
-<button class="category" onclick="filterCategory('Men',this)">
-Men
-</button>
+    <button class="category"
+      onclick="filterCategory('Adults',this)">
+      Adult Coloring
+    </button>
 
-<button class="category" onclick="filterCategory('Bags',this)">
-Handbags
-</button>
+    <button class="category"
+      onclick="filterCategory('Cozy',this)">
+      Cozy & Aesthetic
+    </button>
 
-<button class="category" onclick="filterCategory('Shoes',this)">
-Shoes
-</button>
+    <button class="category"
+      onclick="filterCategory('Seasonal',this)">
+      Seasonal
+    </button>
 
-</div>
+  </div>
+
 </section>
 
 <section id="shop">
 
-<h2 class="title">Our Collection</h2>
+  <h2 class="title">Our Printable Shop</h2>
 
-<input
-class="search"
-id="search"
-type="search"
-placeholder="Search products, brands or categories..."
-oninput="renderProducts()">
+  <input
+    class="search"
+    id="search"
+    type="search"
+    placeholder="Search coloring collections..."
+    oninput="renderProducts()">
 
-<p class="status" id="shopStatus">Loading our collection...</p>
+  <p class="status" id="shopStatus">
+    Loading our collections...
+  </p>
 
-<div class="products" id="products"></div>
+  <div class="products" id="products"></div>
+
+</section>
+
+<section class="about" id="about">
+
+  <h2 class="title">The NOVÉA Experience</h2>
+
+  <p>
+    At NOVÉA, we believe creativity should be simple,
+    accessible and enjoyable.
+
+    Discover thoughtfully designed printable coloring
+    collections, download your favorites and enjoy
+    a little creative time whenever you like.
+
+    Every collection is delivered digitally,
+    ready to print and enjoy.
+  </p>
 
 </section>
 
 <footer>
-<h2>NOVÉA</h2>
-PRE-LOVED. REIMAGINED.
-<p>Discover. Rewear. Repeat.</p>
-<p><a href="index.html" style="color:white">Return to homepage</a></p>
-<p>© 2026 NOVÉA</p>
+
+  <h2>NOVÉA</h2>
+
+  PRINTABLES & CREATIVE COLLECTIONS
+
+  <p>A little creativity, delivered instantly.</p>
+
+  <p>
+    <a href="index.html">Home</a> |
+    <a href="collection.html">Shop</a>
+  </p>
+
+  <p>© 2026 NOVÉA. All rights reserved.</p>
+
 </footer>
 
 <script>
@@ -293,8 +400,8 @@ const SUPABASE_KEY =
 "sb_publishable_scjOBsZKxD2pfmI2fgGG9w_n8vIXU0q";
 
 const db = window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
 let allProducts = [];
@@ -302,158 +409,125 @@ let selectedCategory = "All";
 
 // LOAD PRODUCTS
 
-async function loadProducts(){
+async function loadProducts() {
 
-const container = document.getElementById("products");
-const status = document.getElementById("shopStatus");
+  const container = document.getElementById("products");
+  const status = document.getElementById("shopStatus");
 
-status.textContent = "Loading our collection...";
-container.innerHTML = "";
+  status.textContent = "Loading our collections...";
 
-try{
+  try {
 
-const {data,error} = await db
-.from("products")
-.select("id,title,description,category,brand,size,condition,price,image_url,status,created_at")
-.eq("status","active")
-.order("created_at",{ascending:false});
+    const { data, error } = await db
+      .from("products")
+      .select("*")
+      .eq("status", "active")
+      .order("created_at", { ascending: false });
 
-if(error){
-throw error;
-}
+    if (error) throw error;
 
-allProducts = data || [];
+    allProducts = data || [];
 
-renderProducts();
+    renderProducts();
 
-}catch(error){
+  } catch (error) {
 
-status.textContent =
-"Could not load collection: " + error.message;
+    status.textContent =
+      "Unable to load collections. Please try again later.";
 
-}
+    console.error(error);
+
+  }
+
 }
 
 // DISPLAY PRODUCTS
 
-function renderProducts(){
+function renderProducts() {
 
-const container = document.getElementById("products");
-const status = document.getElementById("shopStatus");
+  const container = document.getElementById("products");
+  const status = document.getElementById("shopStatus");
 
-const query = document
-.getElementById("search")
-.value
-.trim()
-.toLowerCase();
+  const query = document
+    .getElementById("search")
+    .value.trim().toLowerCase();
 
-const filtered = allProducts.filter(product=>{
+  const filtered = allProducts.filter(product => {
 
-const categoryMatch =
-selectedCategory === "All" ||
-product.category === selectedCategory;
+    const category = (product.category || "").toLowerCase();
 
-const searchMatch = [
-product.title,
-product.description,
-product.brand,
-product.category,
-product.size,
-product.condition
-]
-.filter(Boolean)
-.join(" ")
-.toLowerCase()
-.includes(query);
+    const categoryMatch =
+      selectedCategory === "All" ||
+      category === selectedCategory.toLowerCase();
 
-return categoryMatch && searchMatch;
+    const searchMatch = [
+      product.title,
+      product.description,
+      product.category
+    ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase()
+    .includes(query);
 
-});
+    return categoryMatch && searchMatch;
 
-container.innerHTML = "";
+  });
 
-status.textContent =
-filtered.length + (filtered.length === 1 ? " item" : " items");
+  container.innerHTML = "";
 
-if(filtered.length === 0){
+  status.textContent =
+    filtered.length + (
+      filtered.length === 1 ? " collection" : " collections"
+    );
 
-container.innerHTML =
-'<div class="empty">No products found.<br>Check back soon for more beautiful finds.</div>';
+  if (filtered.length === 0) {
 
-return;
+    container.innerHTML = `
+      <div class="empty">
+        No collections found.<br>
+        Check back soon for more creative inspiration.
+      </div>
+    `;
 
-}
+    return;
 
-filtered.forEach(product=>{
+  }
 
-const card = document.createElement("article");
-card.className = "product";
+  filtered.forEach(product => {
 
-const img = document.createElement("img");
-img.src = product.image_url || "";
-img.alt = product.title || "Product";
-img.loading = "lazy";
+    const card = document.createElement("article");
+    card.className = "product";
 
-const heading = document.createElement("h3");
-heading.textContent = product.title || "Untitled product";
+    const img = document.createElement("img");
 
-const price = document.createElement("p");
-price.className = "price";
-price.textContent =
-"$" + Number(product.price).toFixed(2);
+    img.src = product.image_url || "";
+    img.alt = product.title || "Printable coloring collection";
+    img.loading = "lazy";
 
-const details = document.createElement("p");
+    const heading = document.createElement("h3");
+    heading.textContent = product.title || "Printable Collection";
 
-details.textContent = [
-product.brand,
-product.size,
-product.condition
-].filter(Boolean).join(" · ");
+    const category = document.createElement("p");
+    category.className = "product-category";
+    category.textContent = product.category || "PRINTABLES";
 
-const category = document.createElement("p");
-category.textContent = product.category || "";
+    const description = document.createElement("p");
+    description.textContent = product.description || "A beautiful printable coloring collection.";
 
-card.append(
-img,
-heading,
-price,
-details,
-category
-);
+    const price = document.createElement("p");
+    price.className = "price";
+    price.textContent = "$" + Number(product.price || 0).toFixed(2);
 
-container.appendChild(card);
+    const button = document.createElement("a");
 
-});
+    button.className = "buy-button";
 
-}
+    // Add your actual checkout URL to the product
+    // before accepting purchases.
 
-// CATEGORY FILTER
+    const checkoutUrl = product.checkout_url;
 
-function filterCategory(category,button){
+    button.textContent = "VIEW COLLECTION";
 
-selectedCategory = category;
-
-document
-.querySelectorAll(".category")
-.forEach(item=>item.classList.remove("active"));
-
-button.classList.add("active");
-
-document.getElementById("search").value = "";
-
-renderProducts();
-
-document.getElementById("shop").scrollIntoView({
-behavior:"smooth"
-});
-
-}
-
-// INITIALIZE
-
-loadProducts();
-
-</script>
-
-</body>
-</html>
+    if (checkoutUrl && /^https:\/\/\S+$/i
