@@ -530,4 +530,62 @@ function renderProducts() {
 
     button.textContent = "VIEW COLLECTION";
 
-    if (checkoutUrl && /^https:\/\/\S+$/i
+    if (checkoutUrl && /^https:\/\/\S+$/i.test(checkoutUrl)) {
+
+      button.href = checkoutUrl;
+      button.target = "_blank";
+      button.rel = "noopener noreferrer";
+
+    } else {
+
+      button.href = "#";
+      button.textContent = "COMING SOON";
+      button.style.opacity = "0.6";
+
+    }
+
+    card.append(
+      img,
+      heading,
+      category,
+      description,
+      price,
+      button
+    );
+
+    container.appendChild(card);
+
+  });
+
+}
+
+// CATEGORY FILTER
+
+function filterCategory(category, button) {
+
+  selectedCategory = category;
+
+  document
+    .querySelectorAll(".category")
+    .forEach(item => item.classList.remove("active"));
+
+  button.classList.add("active");
+
+  document.getElementById("search").value = "";
+
+  renderProducts();
+
+  document.getElementById("shop").scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+// INITIALIZE
+
+loadProducts();
+
+</script>
+
+</body>
+</html>
