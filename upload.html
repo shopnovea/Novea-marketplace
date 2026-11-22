@@ -1,296 +1,32 @@
-HTML
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>NOVÉA | Digital Studio</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  background: #f8f5ef;
-  color: #493e34;
-  font-family: Arial, sans-serif;
-}
-
-header {
-  text-align: center;
-  padding: 25px;
-  border-bottom: 1px solid #e4dbcf;
-}
-
-.logo {
-  font: 42px Georgia;
-  letter-spacing: 8px;
-  margin: 0;
-}
-
-.tagline {
-  font-size: 10px;
-  letter-spacing: 4px;
-  margin-top: 10px;
-}
-
-nav {
-  text-align: center;
-  padding: 18px;
-}
-
-nav a {
-  color: #493e34;
-  text-decoration: none;
-  font-size: 12px;
-  margin: 0 12px;
-}
-
-.hero {
-  text-align: center;
-  padding: 45px 20px;
-  background: #eae3d8;
-}
-
-.hero h2 {
-  font: normal 42px Georgia;
-  margin: 15px;
-}
-
-.hero p {
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-main {
-  max-width: 850px;
-  margin: auto;
-  padding: 25px 15px 60px;
-}
-
-.panel {
-  background: #fffefa;
-  padding: 30px;
-  margin: 25px 0;
-  border: 1px solid #eee7dd;
-}
-
-.panel h2 {
-  font: 27px Georgia;
-}
-
-label {
-  display: block;
-  text-align: left;
-  font-size: 12px;
-  margin: 18px 0 7px;
-}
-
-input, textarea, select {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #d8cec1;
-  background: white;
-  font: 14px Arial;
-  color: #493e34;
-}
-
-textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-input[type="file"] {
-  padding: 12px;
-}
-
-.help {
-  font-size: 11px;
-  color: #897d70;
-  line-height: 1.7;
-}
-
-.btn {
-  background: #493e34;
-  color: white;
-  border: 0;
-  padding: 14px 22px;
-  font-size: 11px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  margin-top: 18px;
-}
-
-.btn:hover {
-  background: #75614e;
-}
-
-.btn:disabled {
-  opacity: .5;
-  cursor: not-allowed;
-}
-
-.status {
-  font-size: 13px;
-  line-height: 1.7;
-  margin-top: 15px;
-  min-height: 20px;
-  overflow-wrap: anywhere;
-}
-
-#coverPreview {
-  display: none;
-  width: 160px;
-  max-height: 200px;
-  object-fit: cover;
-  margin: 15px auto;
-}
-
-.product {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 18px;
-  padding: 18px 0;
-  border-bottom: 1px solid #e4dbcf;
-  text-align: left;
-}
-
-.product img {
-  width: 100px;
-  height: 125px;
-  object-fit: cover;
-  background: #eee7dc;
-}
-
-.product h3 {
-  font: 20px Georgia;
-  margin: 5px 0;
-}
-
-.product p {
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-.delete {
-  background: #934b40;
-  color: white;
-  border: 0;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none !important;
-}
-
-footer {
-  background: #493e34;
-  color: white;
-  text-align: center;
-  padding: 35px;
-}
-
-footer h2 {
-  font: 30px Georgia;
-  letter-spacing: 6px;
-}
-
-@media(max-width:550px) {
-  .panel {
-    padding: 20px;
-  }
-
-  .hero h2 {
-    font-size: 34px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <h1 class="logo">NOVÉA</h1>
-  <div class="tagline">DIGITAL PRODUCT STUDIO</div>
-</header>
-
-<nav>
-  <a href="index.html">HOME</a>
-  <a href="collection.html">VIEW SHOP</a>
-</nav>
-
-<div class="hero">
-  <p>YOUR CREATIVE BUSINESS, ALL IN ONE PLACE</p>
-  <h2>NOVÉA Digital Studio</h2>
-  <p>Create, upload and manage your printable collections.</p>
-</div>
-
-<main>
-
-<!-- LOGIN -->
-
-<section class="panel" id="loginPanel">
-
-  <h2>Studio Login</h2>
-
-  <p>Sign in to manage your digital products.</p>
-
-  <label>Email address</label>
-  <input id="email" type="email" placeholder="Your email">
-
-  <label>Password</label>
-  <input id="password" type="password" placeholder="Your password">
-
-  <button class="btn" id="loginBtn" onclick="login()">
-    LOG IN TO STUDIO
-  </button>
-
-  <p class="status" id="loginStatus"></p>
-
-</section>
-
-<!-- DASHBOARD -->
-
-<div id="dashboard" class="hidden">
-
-  <section class="panel">
-
-    <h2>Welcome to your Studio</h2>
-
-    <p id="welcome"></p>
-
-    <p>
-      Manage your printable coloring books,
-      digital downloads and collections here.
-    </p>
-
-    <button class="btn" onclick="logout()">
-      LOG OUT
-    </button>
-
-  </section>
-
-  <!-- ADD PRODUCT -->
-
-  <section class="panel">
-
-    <h2>Add a New Printable</h2>
-
-    <p>Create a product listing for your NOVÉA shop.</p>
-
-    <label>Product name</label>
-
-    <input
-      id="title"
-      placeholder="Example: Enchanted Garden Coloring Book"
-    >
-
-    <label>Product description</label>
-
-    <textarea
-      id="description"
-      placeholder="Describe your printable
+create table public.products (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  title text not null,
+  description text,
+  price numeric(10,2) not null default 0,
+  category text,
+  image_url text,
+  image_path text,
+  created_at timestamptz default now()
+);
+
+alter table public.products enable row level security;
+
+create policy "Users can view their products"
+on public.products
+for select
+to authenticated
+using (auth.uid() = user_id);
+
+create policy "Users can add their products"
+on public.products
+for insert
+to authenticated
+with check (auth.uid() = user_id);
+
+create policy "Users can delete their products"
+on public.products
+for delete
+to authenticated
+using (auth.uid() = user_id);
